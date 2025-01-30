@@ -1,0 +1,154 @@
+scalar DateTime @specifiedBy(url: "https://scalars.graphql.org/andimarek/date-time.html")
+
+interface Node {
+    id: ID!
+}
+
+type Contact {
+    email: String
+    phone: String
+}
+
+type Writer implements Node {
+    id: ID!
+    name: String!
+    contact: Contact
+}
+
+type Comment implements Node {
+    id: ID!
+    text: String!
+
+    story: Story!
+}
+
+enum Category {
+    TECHNOLOGY,
+    SCIENCE,
+    ENVIRONMENT
+}
+
+type Story implements Node {
+    id: ID!
+    title: String!
+    category: Category!
+    writer: Writer!
+    date: DateTime!
+    body: String!
+    excerpt(maxLength: Int! = 20): String!
+    likes: Int!
+
+    # Note: in real GraphQL API comments would be pageable
+    comments: [Comment!]!
+
+}
+
+"""
+Defines all fields that can be used to sort the list of stories
+"""
+enum StoryOrderBy {
+    DATE, LIKES, CATEGORY
+}
+
+type StoriesResult {
+    """Number of the requested page.
+
+    If the request doesn't specified a page, it's set to the applied default value by the server.
+    """
+    page: Int!
+    """Size of the requested page (i.e. maximum number of `Story` objects returned)
+
+    If the request doesn't specified a page, it's set to the applied default value by the server.
+    """
+    pageSize: Int!
+
+    """
+    The field that is used to sort the resulting stories from the request
+
+    If the request doesn't specified an `orderBy`, it's set to the applied default value by the server.
+    """
+    orderBy: StoryOrderBy!
+
+    """
+    Number of the next page or empty if there is no next page
+    """
+    nextPage: Int
+    """
+    Number of the previous page or empty when the returned page is the first page, so that there
+    is no previous page"""
+    prevPage: Int
+
+    """
+    List of Storys matching the query
+    """
+    results: [Story!]!
+}
+
+type Query {
+    # Note: in real GraphQL API you might consider Cursor-based pagination
+    # see: https://relay.dev/graphql/connections.htm
+    """
+    Returns a list of stories
+    """
+    stories(
+        """Specify `orderBy` when you want a sorted list.
+           - If no `orderBy` is given, the list is ordered by date
+        """
+        orderBy: StoryOrderBy
+        """
+        Defines the size of a page, i.e. the maximum number of stories returned by a query.
+          - If not specified, a default sensible value on serverside will be set
+        """
+        pageSize: Int,
+        """
+        Specifies the page that should be returned. This is a 1-based index, so the first page
+        is requested using `page: 1`. The amount of stories per `page` is defined by the `pageSize`
+        parameter.
+          - If not specified, page defaults to `1`
+        """
+        page: Int
+    ): StoriesResult!
+
+    """
+    Liefert eine einzelne `Story` zurück.
+    """
+    story(storyId: ID!): Story
+
+    node(id: ID!): Node
+
+}
+
+input AddCommentInput {
+    storyId: ID!
+    text: String!
+}
+
+type AddCommentSuccess {
+    newComment: Comment!
+}
+
+type AddCommentError {
+    msg: String!
+}
+
+union AddCommentPayload = AddCommentSuccess | AddCommentError
+
+input AddLikeInput {
+    storyId: ID!
+}
+
+type AddLikeSuccess {
+    story: Story!
+}
+
+type AddLikeError {
+    msg: String!
+}
+
+union AddLikePayload = AddLikeSuccess | AddLikeError
+
+
+type Mutation {
+    addComment(input: AddCommentInput!): AddCommentPayload!
+    addLike(input: AddLikeInput!): AddLikePayload!
+}
