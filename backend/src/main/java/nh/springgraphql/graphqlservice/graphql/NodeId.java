@@ -11,14 +11,14 @@ public record NodeId(String typeName, String id) {
 
         @Override
         public NodeId convert(String source) {
-            var parts = source.split(":");
+            var parts = source.split("_");
             if (parts.length < 2) {
                 // das machen wir nur, um die Verwendung im Workshop zu vereinfachen
                 // wenn wir keine gültige Id haben, setzen wir nur die Id, aber keinen typeName :-/
                 // Somit machen wir die NodeId ein Stück weit abwärtskompatibel und müssen z.B.
                 // nicht alle Tests umstellen, in denen einen id als String angegeben wird,
                 // sobald wir die API um die NodeId erweitern
-                return new NodeId("<unknwon>", source);
+                return new NodeId("<unknown>", source);
             }
             return new NodeId(parts[0], parts[1]);
         }
@@ -43,6 +43,6 @@ public record NodeId(String typeName, String id) {
 
     @Override
     public String toString() {
-        return "%s:%s".formatted(typeName, id);
+        return "%s_%s".formatted(typeName, id);
     }
 }

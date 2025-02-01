@@ -1,0 +1,6 @@
+query GetSingleStory($storyId: ID!) {
+    story(storyId: $storyId) {
+        id
+        title
+    }
+}

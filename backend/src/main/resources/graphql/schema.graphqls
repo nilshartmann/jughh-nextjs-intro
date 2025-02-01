@@ -28,6 +28,10 @@ enum Category {
     ENVIRONMENT
 }
 
+type Image {
+    uri: String!
+}
+
 type Story implements Node {
     id: ID!
     title: String!
@@ -37,6 +41,8 @@ type Story implements Node {
     body: String!
     excerpt(maxLength: Int! = 20): String!
     likes: Int!
+
+    image: Image
 
     # Note: in real GraphQL API comments would be pageable
     comments: [Comment!]!

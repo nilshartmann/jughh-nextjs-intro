@@ -51,6 +51,13 @@ class QueryController {
         return storyRepository.generateExcerpt(story, maxLength);
     }
 
+    @SchemaMapping
+    Image image(Story story) {
+        return new Image(
+            "/images/stories/s_%s.webp".formatted(story.id())
+        );
+    }
+
     @GraphQlExceptionHandler
     GraphQLError handleInvalidArgs(InvalidRequestException invalidRequestException, DataFetchingEnvironment dataFetchingEnvironment) {
         return GraphQLError.newError()

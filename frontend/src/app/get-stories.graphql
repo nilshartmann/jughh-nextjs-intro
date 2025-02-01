@@ -1,0 +1,19 @@
+fragment BaseStoryFragment on Story {
+    id
+    title
+    excerpt(maxLength: 150)
+    date
+    category
+    likes
+    image { uri }
+    writer {
+        name
+    }
+}
+query GetStories {
+    stories(pageSize: 6) {
+        results {
+            ...BaseStoryFragment
+        }
+    }
+}
