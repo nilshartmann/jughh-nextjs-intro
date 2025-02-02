@@ -21,7 +21,7 @@ export function LikesWidget({ story }: LikesWidgetProps) {
         type={"submit"}
         disabled={pending}
         className={twMerge(
-          "border-orange_2 text-orange_2 hover:bg-orange_2 me-2 flex space-x-2 rounded border bg-white p-2 text-[15px] hover:cursor-pointer hover:text-white disabled:cursor-default disabled:border-gray-900 disabled:bg-gray-300 disabled:text-gray-900 disabled:hover:text-gray-900",
+          "flex space-x-2 rounded border border-teal-900 p-1 text-[15px] hover:cursor-pointer hover:bg-teal-900 hover:text-white disabled:cursor-default disabled:border-gray-900 disabled:bg-gray-300 disabled:text-gray-900 disabled:hover:text-gray-900",
         )}
       >
         <span>{story.likes}</span>

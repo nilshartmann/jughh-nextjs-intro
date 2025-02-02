@@ -67,9 +67,19 @@ public class StoryRepository {
 //        // run some heavily complex algorithms or ask AI to generate
 //        // the excerpt...
 //        sleep(2000);
-        var b = story.body();
-        return b.substring(0, Math.min(maxLength, b.length() - 1));
 
+        var body = story.body();
+
+        if (body.length() <= maxLength) {
+            return body;
+        }
+
+        int lastSpaceBeforeLimit = body.lastIndexOf(' ', maxLength);
+        if (lastSpaceBeforeLimit == -1) {
+            return body.substring(0, maxLength);
+        }
+
+        return body.substring(0, lastSpaceBeforeLimit);
     }
 
     public Optional<Comment> findComment(String id) {

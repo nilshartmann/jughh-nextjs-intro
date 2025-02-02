@@ -25,6 +25,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <title>News.ly Demo</title>
+        {/*
+
+        NOTE:
+        Next.js has built-in support for both optimized Image and Font handling.
+         -> In a "real" application I would consider using this built-in features
+        */}
+        <link href="/fonts/google-fonts.css" rel="stylesheet" />
+        <link href="/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/fontawesome/css/regular.css" rel="stylesheet" />
+        <link href="/fontawesome/css/solid.css" rel="stylesheet" />
+      </head>
       <body
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

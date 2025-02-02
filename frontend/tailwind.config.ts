@@ -1,3 +1,4 @@
+import defaultTheme from "tailwindcss/defaultTheme";
 import type { Config } from "tailwindcss";
 
 export default {
@@ -7,7 +8,14 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        space: ["Space Grotesk", ...defaultTheme.fontFamily.sans],
+        inter: ["inter", ...defaultTheme.fontFamily.sans],
+        barlow: ["barlow", ...defaultTheme.fontFamily.sans],
+        opensans: ["Open Sans", ...defaultTheme.fontFamily.sans],
+      },
+    },
     screens: {
       sm: "767px",
       // => @media (min-width: 767px) { ... }

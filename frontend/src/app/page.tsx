@@ -6,6 +6,7 @@ import { BaseStory } from "@/types";
 import { LikesWidget } from "@/components/LikesWidget";
 import { formatDate } from "@/components/format-date";
 import Breaking from "@/components/Breaking";
+import { NewsletterRegistration } from "@/components/NewsletterRegistration";
 
 export default async function Home() {
   // const {} = await query({
@@ -22,21 +23,26 @@ export default async function Home() {
   const f = data.stories.results.map((r) => r.title);
 
   return (
-    <div className={"font-inter flex min-h-svh flex-col text-teal-800"}>
-      <header
+    <div className={"font-inter flex min-h-svh flex-col text-teal-900"}>
+      <div
         className={
-          "mb-8 flex h-20 items-center bg-green-700 text-2xl text-sky-50"
+          "mx-auto flex w-full max-w-screen-lg items-center justify-end"
         }
       >
-        <div
-          className={
-            "mx-auto flex w-full max-w-screen-lg items-center justify-between px-4 font-bold"
-          }
-        >
-          <div>news.ly</div>
+        <NewsletterRegistration />
+      </div>
+      <header
+        className={
+          "mb-8 flex h-20 items-center bg-teal-700 text-2xl text-sky-50"
+        }
+      >
+        <div className={"mx-auto w-full max-w-screen-lg"}>
+          <div className={"flex items-center justify-between px-4 font-bold"}>
+            <div className={"font-space text-4xl font-bold"}>news.ly</div>
 
-          <div className={"w-64 rounded bg-green-200 px-4 py-2"}>
-            <Breaking>Lorem ipsum dolor</Breaking>
+            {/*<div className={"w-64 rounded bg-green-200 px-4 py-2"}>*/}
+            {/*  <Breaking>Lorem ipsum dolor</Breaking>*/}
+            {/*</div>*/}
           </div>
         </div>
       </header>
@@ -57,43 +63,47 @@ type StoryCardProps = {
 function StoryCard({ story }: StoryCardProps) {
   return (
     <div
-      className={"h-full rounded border border-gray-200 bg-white p-4 shadow-lg"}
+      className={
+        "flex h-full flex-col justify-between space-y-4 rounded border border-gray-200 bg-white p-4 shadow-lg"
+      }
     >
-      <div className={"flex flex-col justify-between"}>
-        <div>
-          {story.image && (
+      <div className={"flex flex-col space-y-4"}>
+        {story.image && (
+          <div>
             <Link prefetch={false} href={`/stories/${story.id}`}>
               <div className={"overflow-hidden"}>
                 <img
-                  className="mb-2 h-32 max-h-full w-full max-w-full transform rounded object-cover transition-all duration-500 ease-in-out hover:scale-110"
+                  className="h-32 max-h-full w-full max-w-full transform border-b-4 border-b-rose-700 object-cover transition-all duration-500 ease-in-out hover:scale-110"
                   src={story.image.uri}
                   alt={story.title}
                 />
               </div>
             </Link>
-          )}
-          <div className={"mt-4 flex items-center justify-between"}>
-            <div className={"font-bold leading-3 text-red-600"}>
-              {story.category}
-            </div>
-            <div>{formatDate(story.date)} </div>
           </div>
-          <H1 className={"font-space mb-4 mt-4 font-bold"}>
-            <Link
-              prefetch={true}
-              href={`/stories/${story.id}`}
-              className={"hover:text-orange_2 hover:underline"}
-            >
-              {story.title}
-            </Link>
-          </H1>
+        )}
+        <div className={"flex items-center justify-between"}>
+          <div className={"font-bold leading-3 text-teal-700"}>
+            {story.category}
+          </div>
+          <div className={"leading-3 text-teal-700"}>
+            {formatDate(story.date)}{" "}
+          </div>
         </div>
-        <div className={"text font-inter mt-2 text-gray-500"}>
-          {story.excerpt}
-        </div>
+        <H1 className={"font-opensans font-bold text-teal-700"}>
+          <Link
+            prefetch={true}
+            href={`/stories/${story.id}`}
+            className={"hover:text-teal-800 hover:underline"}
+          >
+            {story.title}
+          </Link>
+        </H1>
+        <div className={"text font-inter"}>{story.excerpt}</div>
         {/*<div className={"mt-4 space-y-2"}>*/}
         {/*  <RecipeCategories recipe={recipe} />*/}
         {/*</div>*/}
+      </div>
+      <div className={"flex flex-col space-y-4"}>
         <LikesWidget story={story} />
       </div>
     </div>

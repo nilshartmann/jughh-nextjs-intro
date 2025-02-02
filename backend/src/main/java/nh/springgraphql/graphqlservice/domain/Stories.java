@@ -59,7 +59,7 @@ public class Stories {
             new Story(
                 "3",
                 OffsetDateTime.of(2024, 8, 5, 16, 45, 0, 0, ZoneOffset.ofHours(3)),
-                "Quantum Computing: The Next Digital Revolution",
+                "The Next Digital Revolution",
                 """
                 Quantum computing is poised to revolutionize industries by solving problems that classical computers 
                 cannot handle efficiently. Companies like IBM, Google, and academic institutions are making rapid 
