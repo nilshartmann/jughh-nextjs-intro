@@ -68,18 +68,25 @@ public class StoryRepository {
 //        // the excerpt...
 //        sleep(2000);
 
-        var body = story.body();
+        var effectiveMaxLength = maxLength - 1;
 
-        if (body.length() <= maxLength) {
-            return body;
+        var input = story.body();
+
+        if (input.length() <= effectiveMaxLength) {
+            return input.endsWith(".") ? input : input + ".";
         }
 
-        int lastSpaceBeforeLimit = body.lastIndexOf(' ', maxLength);
+        int lastSpaceBeforeLimit = input.lastIndexOf(' ', effectiveMaxLength);
         if (lastSpaceBeforeLimit == -1) {
-            return body.substring(0, maxLength);
+            return input.substring(0, effectiveMaxLength) + "."; // No spaces found, truncate and add period
         }
 
-        return body.substring(0, lastSpaceBeforeLimit);
+        String truncated = input.substring(0, lastSpaceBeforeLimit);
+
+        // Remove non-alphabetic characters from the end
+        truncated = truncated.replaceAll("[^a-zA-Z0-9]+$", "");
+
+        return truncated + ".";
     }
 
     public Optional<Comment> findComment(String id) {
