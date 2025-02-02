@@ -15,7 +15,7 @@ public class Stories {
         return new LinkedList<>(List.of(
             new Story(
                 "1",
-                OffsetDateTime.of(2024, 10, 15, 14, 0, 0, 0, ZoneOffset.ofHours(2)),
+                OffsetDateTime.of(2023, 10, 15, 14, 0, 0, 0, ZoneOffset.ofHours(2)),
                 "AI Revolutionizing Healthcare",
                 """
                 Artificial intelligence is rapidly transforming the healthcare industry. 
@@ -37,7 +37,7 @@ public class Stories {
             ),
             new Story(
                 "2",
-                OffsetDateTime.of(2024, 9, 20, 10, 30, 0, 0, ZoneOffset.ofHours(1)),
+                OffsetDateTime.of(2025, 1, 13, 10, 30, 0, 0, ZoneOffset.ofHours(1)),
                 "Climate Change and Renewable Energy",
                 """
                 As global temperatures continue to rise, the push for renewable energy has never been stronger. 
@@ -52,7 +52,7 @@ public class Stories {
                     new Comment("5", "We need more action now."),
                     new Comment("6", "Interesting article, well done.")
                 )),
-                Category.ENVIRONMENT,
+                Category.SCIENCE,
                 writer2,
                 95
             ),
@@ -74,7 +74,7 @@ public class Stories {
                     new Comment("8", "I wonder how soon we’ll see real-world applications."),
                     new Comment("9", "Great explanation of the topic!")
                 )),
-                Category.SCIENCE,
+                Category.TECHNOLOGY,
                 writer3,
                 210
             ),
@@ -102,7 +102,7 @@ public class Stories {
             ),
             new Story(
                 "5",
-                OffsetDateTime.of(2024, 6, 25, 12, 0, 0, 0, ZoneOffset.ofHours(4)),
+                OffsetDateTime.of(2024, 7, 25, 12, 0, 0, 0, ZoneOffset.ofHours(4)),
                 "New Discoveries in Marine Biology",
                 """
                 Scientists exploring the depths of the Pacific Ocean have discovered a previously unknown species 
@@ -123,7 +123,7 @@ public class Stories {
             ),
             new Story(
                 "6",
-                OffsetDateTime.of(2024, 5, 30, 18, 20, 0, 0, ZoneOffset.ofHours(0)),
+                OffsetDateTime.of(2024, 7, 17, 18, 20, 0, 0, ZoneOffset.ofHours(0)),
                 "Sustainable Farming and Vertical Agriculture",
                 """
                 Farmers worldwide are adopting innovative techniques like vertical farming to maximize food production 
@@ -264,6 +264,93 @@ public class Stories {
                 writer3,
                 185
             )
+            ,
+            new Story(
+                "13",
+                OffsetDateTime.of(2023, 10, 12, 15, 30, 0, 0, ZoneOffset.ofHours(2)),
+                "AI-Powered Assistants in Education",
+                """
+                AI-driven learning platforms are revolutionizing the way students engage with education. 
+                Virtual assistants can now provide personalized tutoring, adapting lessons to the individual learning 
+                pace of students, ensuring they grasp concepts more effectively.
+                
+                While educators welcome these tools, some fear AI might replace human interaction in education. 
+                Striking a balance between technology and traditional teaching methods is key to harnessing AI's 
+                full potential without compromising human guidance.
+                """,
+                List.of(
+                    new Comment("37", "AI in education is exciting!"),
+                    new Comment("38", "Hope this helps students globally."),
+                    new Comment("39", "I prefer human teachers, but AI could assist well.")
+                ),
+                Category.TECHNOLOGY,
+                writer1,
+                155
+            ),
+            new Story(
+                "14",
+                OffsetDateTime.of(2025, 1, 5, 11, 45, 0, 0, ZoneOffset.ofHours(1)),
+                "The Impact of Reforestation on Climate Change",
+                """
+                Reforestation projects are playing a crucial role in absorbing carbon dioxide and reversing deforestation. 
+                Countries around the world are investing in large-scale tree planting efforts to mitigate climate change effects.
+                
+                Environmentalists, however, stress that simply planting trees is not enough—biodiversity and sustainable 
+                forest management are key. Reforestation, when combined with reduced emissions, can contribute significantly 
+                to a healthier planet.
+                """,
+                List.of(
+                    new Comment("40", "Reforestation is a must!"),
+                    new Comment("41", "This gives hope for climate recovery."),
+                    new Comment("42", "We need long-term solutions alongside tree planting.")
+                ),
+                Category.ENVIRONMENT,
+                writer2,
+                180
+            ),
+            new Story(
+                "15",
+                OffsetDateTime.of(2023, 8, 18, 17, 15, 0, 0, ZoneOffset.ofHours(3)),
+                "Breakthrough in Battery Storage Technology",
+                """
+                Scientists have developed a new solid-state battery that significantly increases energy storage capacity 
+                while reducing charging times. This breakthrough is expected to enhance electric vehicles and renewable 
+                energy storage.
+                
+                Unlike traditional lithium-ion batteries, solid-state technology is safer and has a longer lifespan. 
+                Experts predict this innovation will accelerate the shift towards a more sustainable energy infrastructure.
+                """,
+                List.of(
+                    new Comment("43", "This could change the energy industry!"),
+                    new Comment("44", "Faster charging times are a game changer."),
+                    new Comment("45", "Excited to see this technology in EVs soon!")
+                ),
+                Category.TECHNOLOGY,
+                writer3,
+                205
+            ),
+            new Story(
+                "16",
+                OffsetDateTime.of(2025, 1, 15, 14, 10, 0, 0, ZoneOffset.ofHours(0)),
+                "Coral Reef Restoration: A Race Against Time",
+                """
+                Marine biologists are employing new methods to restore coral reefs affected by rising ocean temperatures. 
+                Techniques like coral farming and genetic adaptation are showing promising results in helping reefs recover.
+                
+                However, scientists warn that without addressing climate change, restoration efforts might only provide 
+                temporary relief. Protecting marine ecosystems requires a global commitment to reducing carbon emissions 
+                and pollution.
+                """,
+                List.of(
+                    new Comment("46", "Coral reefs are so important to marine life."),
+                    new Comment("47", "We need urgent action against ocean warming!"),
+                    new Comment("48", "Great to see restoration efforts making a difference.")
+                ),
+                Category.ENVIRONMENT,
+                writer2,
+                175
+            )
+
         ));
     }
 }

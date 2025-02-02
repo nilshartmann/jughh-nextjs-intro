@@ -5,6 +5,7 @@ export type BaseStory = {
   date: string;
   category: string;
   likes: number;
+  wordCount: number;
   image?: { uri: string };
   writer: { name: string };
 };

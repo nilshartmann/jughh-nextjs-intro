@@ -13,6 +13,7 @@ import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.graphql.execution.ErrorType;
 import org.springframework.stereotype.Controller;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import static nh.springgraphql.graphqlservice.config.Utils.sleep;
@@ -49,6 +50,12 @@ class QueryController {
     @SchemaMapping
     String excerpt(Story story, @Argument int maxLength) {
         return storyRepository.generateExcerpt(story, maxLength);
+    }
+
+    @SchemaMapping
+    long wordCount(Story story) {
+        long wordCount = story.body().chars().filter(ch -> ch == 'e').count()*10;
+        return wordCount;
     }
 
     @SchemaMapping

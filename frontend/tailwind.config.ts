@@ -1,5 +1,5 @@
-import defaultTheme from "tailwindcss/defaultTheme";
 import type { Config } from "tailwindcss";
+import defaultTheme from "tailwindcss/defaultTheme";
 
 export default {
   content: [
@@ -14,6 +14,20 @@ export default {
         inter: ["inter", ...defaultTheme.fontFamily.sans],
         barlow: ["barlow", ...defaultTheme.fontFamily.sans],
         opensans: ["Open Sans", ...defaultTheme.fontFamily.sans],
+      },
+      keyframes: {
+        "marquee-left": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(calc(-100% - var(--gap)))" },
+        },
+        "marquee-up": {
+          from: { transform: "translateY(0)" },
+          to: { transform: "translateY(calc(-100% - var(--gap)))" },
+        },
+      },
+      animation: {
+        "marquee-left": "marquee-left var(--duration, 40s) linear infinite",
+        "marquee-up": "marquee-up var(--duration, 40s) linear infinite",
       },
     },
     screens: {

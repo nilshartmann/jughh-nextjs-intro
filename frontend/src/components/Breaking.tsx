@@ -1,39 +1,38 @@
 "use client";
-import { useEffect, useRef, ReactNode } from "react";
+
+import { ReactNode, useState } from "react";
+import { twMerge } from "tailwind-merge";
+
+import { Marquee } from "@/components/Marquee";
 
 interface BreakingProps {
   children: ReactNode;
   speed?: number;
 }
 
-const Breaking: React.FC<BreakingProps> = ({ children, speed = 10 }) => {
-  const marqueeRef = useRef<HTMLDivElement | null>(null);
+const Breaking: React.FC<BreakingProps> = ({ children, speed = 25 }) => {
+  const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    const marquee = marqueeRef.current;
-    if (!marquee) return;
-
-    let animationFrame: number;
-    let start = performance.now();
-
-    const animate = (time: number) => {
-      const elapsed = (time - start) / speed;
-      marquee.style.transform = `translateX(${-elapsed % marquee.clientWidth}px)`;
-      animationFrame = requestAnimationFrame(animate);
-    };
-
-    animationFrame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationFrame);
-  }, [speed]);
+  const buttonClassName = twMerge("cursor", visible ? "ms-4" : "rounded-lg");
 
   return (
-    <div className="relative w-full overflow-hidden whitespace-nowrap bg-gray-800 py-2 text-white">
-      <div
-        ref={marqueeRef}
-        style={{ display: "inline-block", whiteSpace: "nowrap" }}
-      >
-        {children}
-      </div>
+    <div className={"flex"}>
+      {visible && (
+        <Marquee
+          pauseOnHover={true}
+          className="tracking-wide [--duration:20s] motion-reduce:overflow-auto" // pass class to change gap or speed
+          innerClassName="motion-reduce:animate-none motion-reduce:first:hidden"
+        >
+          {children}
+        </Marquee>
+      )}
+      <button className={buttonClassName} onClick={() => setVisible(!visible)}>
+        {visible ? (
+          <i className="fa-regular fa-circle-xmark" />
+        ) : (
+          <i className="fa-solid fa-otter" />
+        )}
+      </button>
     </div>
   );
 };

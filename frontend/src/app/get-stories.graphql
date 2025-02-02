@@ -6,12 +6,13 @@ fragment BaseStoryFragment on Story {
     category
     likes
     image { uri }
+    wordCount
     writer {
         name
     }
 }
 query GetStories {
-    stories(pageSize: 12) {
+    stories(pageSize: 16) {
         results {
             ...BaseStoryFragment
         }

@@ -3,6 +3,9 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
+import GlobalHeader from "@/components/layout/GlobalHeader";
+import { NewsletterRegistration } from "@/components/NewsletterRegistration";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -43,7 +46,17 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <div className={"font-inter flex min-h-svh flex-col text-teal-900"}>
+          <div
+            className={
+              "mx-auto flex w-full max-w-screen-lg items-center justify-end"
+            }
+          >
+            <NewsletterRegistration />
+          </div>
+          <GlobalHeader />
+          {children}
+        </div>
       </body>
     </html>
   );

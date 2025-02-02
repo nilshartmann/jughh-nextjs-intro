@@ -43,6 +43,12 @@ type Story implements Node {
     Returns an excerpt of this story, with a maximum length of `maxLength` characters.
     """
     excerpt(maxLength: Int! = 20): String!
+    """
+    Returns the number of words of this story.
+
+    Note: **for demo purposes to make values more realistic, the values returned do  _not match_ the real number of words!**
+    """
+    wordCount: Int!
     likes: Int!
 
     image: Image
