@@ -11,7 +11,6 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.config({
-    ignores: ["_generated*"],
     plugins: ["unused-imports", "simple-import-sort", "import"],
     extends: ["next/core-web-vitals", "next/typescript"],
     rules: {
@@ -32,6 +31,7 @@ const eslintConfig = [
       "prefer-const": "off",
     },
   }),
+  { ignores: ["_generated*"] },
 ];
 
 export default eslintConfig;
