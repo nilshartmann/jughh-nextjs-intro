@@ -125,11 +125,14 @@ type Query {
     ): StoriesResult!
 
     """
-    Liefert eine einzelne `Story` zurück.
+    Returns the `Story` with the given `storyId` or `null` if there is no such story.
     """
     story(storyId: ID!): Story
 
     node(id: ID!): Node
+
+    """For testing the API, returns a simple string"""
+    hello: String!
 
 }
 

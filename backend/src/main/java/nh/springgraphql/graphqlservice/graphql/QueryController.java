@@ -43,6 +43,11 @@ class QueryController {
     }
 
     @QueryMapping
+    String hello() {
+        return "World";
+    }
+
+    @QueryMapping
     Optional<Story> story(@Argument NodeId storyId) {
         return this.storyRepository.findStory(storyId.id());
     }
