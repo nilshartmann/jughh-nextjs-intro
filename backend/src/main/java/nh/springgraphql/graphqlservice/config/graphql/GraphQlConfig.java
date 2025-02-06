@@ -26,10 +26,10 @@ public class GraphQlConfig {
         return new NodeId.NodeIdConverter();
     }
 
-    @Bean
-    SimplifiedTracingInstrumentation tracingInstrumentation() {
-        return new SimplifiedTracingInstrumentation();
-    }
+//    @Bean
+//    SimplifiedTracingInstrumentation tracingInstrumentation() {
+//        return new SimplifiedTracingInstrumentation();
+//    }
 
 //    @Bean
 //    MaxQueryComplexityInstrumentation maxQueryComplexityInstrumentation() {
