@@ -37,16 +37,16 @@ public class MutationController {
 
     // ------------------------------------------------------------------------------------------------------
 
-    interface AddCommentPayload {
+    public interface AddCommentPayload {
     }
 
-    record AddCommentError(String msg) implements AddCommentPayload {
+    public record AddCommentError(String msg) implements AddCommentPayload {
     }
 
-    record AddCommentSuccess(Comment newComment) implements AddCommentPayload {
+    public record AddCommentSuccess(Comment newComment) implements AddCommentPayload {
     }
 
-    record AddCommentInput(NodeId storyId, String text) {
+    public record AddCommentInput(NodeId storyId, String text) {
     }
 
     @MutationMapping
@@ -66,16 +66,16 @@ public class MutationController {
 
     // ------------------------------------------------------------------------------------------------------
 
-    interface AddLikePayload {
+    public interface AddLikePayload {
     }
 
-    record AddLikeError(String msg) implements AddLikePayload {
+    public record AddLikeError(String msg) implements AddLikePayload {
     }
 
-    record AddLikeSuccess(Story story) implements AddLikePayload {
+    public record AddLikeSuccess(Story story) implements AddLikePayload {
     }
 
-    record AddLikeInput(NodeId storyId) {
+    public record AddLikeInput(NodeId storyId) {
     }
 
     @MutationMapping
