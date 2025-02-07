@@ -36,7 +36,7 @@ jobs:
         with:
           context: .
           dockerfile: Dockerfile
-          platforms: linux/amd64,linux/arm64/v8
+          platforms: linux/amd64
           push: true
           tags: |
             ghcr.io/${{ github.actor }}/ecolify-backend-native:latest
