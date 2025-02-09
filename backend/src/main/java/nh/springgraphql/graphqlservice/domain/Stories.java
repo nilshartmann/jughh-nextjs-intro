@@ -8,9 +8,9 @@ import java.util.List;
 public class Stories {
 
     public static List<Story> generateSampleStories() {
-        Writer writer1 = new Writer("W1", "Alice Johnson", Contact.ofEmail("alice@example.com"));
-        Writer writer2 = new Writer("W2", "Bob Smith", Contact.ofPhone("+987654321"));
-        Writer writer3 = new Writer("W3", "Charlie Davis", Contact.ofEmail("charlie@example.com"));
+        Writer writer1 = new Writer("1", "Alice Johnson", Contact.ofEmail("alice@example.com"));
+        Writer writer2 = new Writer("2", "Bob Smith", Contact.ofPhone("+987654321"));
+        Writer writer3 = new Writer("3", "Charlie Davis", Contact.ofEmail("charlie@example.com"));
 
         return new LinkedList<>(List.of(
             new Story(
