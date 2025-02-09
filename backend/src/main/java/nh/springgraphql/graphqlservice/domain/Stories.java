@@ -8,9 +8,9 @@ import java.util.List;
 public class Stories {
 
     public static List<Story> generateSampleStories() {
-        Writer writer1 = new Writer("W1", "Alice Johnson", new Contact("alice@example.com", "+123456789"));
-        Writer writer2 = new Writer("W2", "Bob Smith", new Contact("bob@example.com", "+987654321"));
-        Writer writer3 = new Writer("W3", "Charlie Davis", new Contact("charlie@example.com", "+192837465"));
+        Writer writer1 = new Writer("W1", "Alice Johnson", Contact.ofEmail("alice@example.com"));
+        Writer writer2 = new Writer("W2", "Bob Smith", Contact.ofPhone("+987654321"));
+        Writer writer3 = new Writer("W3", "Charlie Davis", Contact.ofEmail("charlie@example.com"));
 
         return new LinkedList<>(List.of(
             new Story(
@@ -349,7 +349,129 @@ public class Stories {
                 Category.ENVIRONMENT,
                 writer2,
                 175
+            ),
+            new Story(
+                "17",
+                OffsetDateTime.of(2023, 6, 15, 13, 45, 0, 0, ZoneOffset.ofHours(2)),
+                "The Role of Wetlands in Climate Protection",
+                """
+                Wetlands play a crucial role in absorbing carbon dioxide and preventing flooding. Scientists are 
+                emphasizing the importance of preserving these ecosystems as natural barriers against climate change.
+                
+                Governments worldwide are increasing funding for wetland restoration projects. Experts believe 
+                protecting wetlands is as essential as reforestation in fighting global warming.
+                """,
+                List.of(
+                    new Comment("49", "Wetlands are nature’s best flood protection!"),
+                    new Comment("50", "We need stronger policies to protect these ecosystems."),
+                    new Comment("51", "Glad to see awareness growing on this topic.")
+                ),
+                Category.ENVIRONMENT,
+                writer1,
+                165
+            ),
+            new Story(
+                "18",
+                OffsetDateTime.of(2023, 5, 20, 10, 10, 0, 0, ZoneOffset.ofHours(1)),
+                "NASA's Search for Exoplanets Continues",
+                """
+                NASA's exoplanet-hunting mission has identified several planets that may have conditions suitable for life. 
+                The latest discoveries were made using advanced telescopes capable of detecting atmospheric composition.
+                
+                Scientists are now analyzing whether these planets could sustain liquid water, a key ingredient for life. 
+                If confirmed, this could be one of the most significant scientific breakthroughs of the century.
+                """,
+                List.of(
+                    new Comment("52", "Are we alone? Exciting times ahead!"),
+                    new Comment("53", "Hope we find a habitable exoplanet soon."),
+                    new Comment("54", "Space exploration keeps surprising us!")
+                ),
+                Category.SCIENCE,
+                writer2,
+                220
+            ),
+            new Story(
+                "19",
+                OffsetDateTime.of(2023, 4, 10, 15, 20, 0, 0, ZoneOffset.ofHours(3)),
+                "Saving Endangered Pollinators",
+                """
+                Pollinators like bees and butterflies are declining at an alarming rate due to habitat loss and pesticides. 
+                Scientists warn that without them, global food production could suffer severe consequences.
+                
+                Conservation efforts include planting pollinator-friendly habitats and banning harmful pesticides. 
+                If successful, these initiatives could help restore declining bee populations.
+                """,
+                List.of(
+                    new Comment("55", "We must protect pollinators!"),
+                    new Comment("56", "A world without bees would be catastrophic."),
+                    new Comment("57", "Great to see awareness growing about this issue.")
+                ),
+                Category.ENVIRONMENT,
+                writer3,
+                195
+            ),
+            new Story(
+                "20",
+                OffsetDateTime.of(2023, 3, 8, 9, 30, 0, 0, ZoneOffset.ofHours(0)),
+                "Microplastics Found in the Deep Ocean",
+                """
+                A new study reveals that microplastics have reached the deepest parts of the ocean, raising concerns 
+                about marine biodiversity. Scientists found plastic particles in deep-sea organisms, highlighting the 
+                widespread impact of human pollution.
+                
+                Calls for stricter regulations on plastic use and better waste management are growing. Researchers are 
+                developing innovative ways to filter plastics from water before they reach critical ecosystems.
+                """,
+                List.of(
+                    new Comment("58", "Plastic pollution is out of control!"),
+                    new Comment("59", "We need urgent action on waste management."),
+                    new Comment("60", "Shocking but not surprising.")
+                ),
+                Category.SCIENCE,
+                writer1,
+                180
+            ),
+            new Story(
+                "21",
+                OffsetDateTime.of(2023, 2, 12, 12, 50, 0, 0, ZoneOffset.ofHours(1)),
+                "Geoengineering: A Last Resort for Climate Change?",
+                """
+                Some scientists propose geoengineering as a last-resort solution to mitigate climate change. 
+                Techniques like artificial cloud seeding and carbon capture could help reduce rising temperatures.
+                
+                However, the long-term effects of geoengineering remain uncertain. Experts warn that these approaches 
+                should only complement existing sustainability efforts, not replace them.
+                """,
+                List.of(
+                    new Comment("61", "Geoengineering sounds risky but necessary."),
+                    new Comment("62", "We need to focus on reducing emissions first."),
+                    new Comment("63", "Hope we don’t have to rely on this too much.")
+                ),
+                Category.SCIENCE,
+                writer2,
+                170
+            ),
+            new Story(
+                "22",
+                OffsetDateTime.of(2023, 1, 3, 16, 40, 0, 0, ZoneOffset.ofHours(2)),
+                "Revolution in Ocean Farming",
+                """
+                Ocean farming is emerging as a sustainable alternative to traditional agriculture. Seaweed and shellfish 
+                farms require no freshwater or fertilizer, making them environmentally friendly and highly productive.
+                
+                Scientists believe ocean farming could help reduce the environmental footprint of food production. 
+                As demand for sustainable food sources grows, interest in ocean farming is increasing worldwide.
+                """,
+                List.of(
+                    new Comment("64", "Sustainable seafood is the way forward!"),
+                    new Comment("65", "More innovation in farming is needed."),
+                    new Comment("66", "Ocean farming sounds like a great solution!")
+                ),
+                Category.ENVIRONMENT,
+                writer3,
+                200
             )
+
 
         ));
     }

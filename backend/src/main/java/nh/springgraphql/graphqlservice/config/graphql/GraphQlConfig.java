@@ -7,8 +7,7 @@ import graphql.analysis.MaxQueryDepthInstrumentation;
 import graphql.scalars.ExtendedScalars;
 import nh.springgraphql.graphqlservice.config.graphql.complexity.DirectiveBasedCalculator;
 import nh.springgraphql.graphqlservice.config.graphql.tracing.SimplifiedTracingInstrumentation;
-import nh.springgraphql.graphqlservice.domain.Comment;
-import nh.springgraphql.graphqlservice.domain.Writer;
+import nh.springgraphql.graphqlservice.domain.*;
 import nh.springgraphql.graphqlservice.graphql.MutationController;
 import nh.springgraphql.graphqlservice.graphql.NodeId;
 import org.slf4j.Logger;
@@ -21,7 +20,9 @@ import org.springframework.graphql.execution.RuntimeWiringConfigurer;
 import java.awt.print.Book;
 
 @Configuration
- @RegisterReflectionForBinding({Comment.class, Writer.class, MutationController.AddCommentSuccess.class, MutationController.AddCommentError.class, MutationController.AddLikeSuccess.class, MutationController.AddLikeError.class})
+ @RegisterReflectionForBinding({
+     Comment.class, Writer.class, MutationController.AddCommentSuccess.class, MutationController.AddCommentError.class, MutationController.AddLikeSuccess.class, MutationController.AddLikeError.class,
+     Contact.class, EMailContact.class, PhoneContact.class})
 public class GraphQlConfig {
     @Bean
     public RuntimeWiringConfigurer runtimeWiringConfigurer() {

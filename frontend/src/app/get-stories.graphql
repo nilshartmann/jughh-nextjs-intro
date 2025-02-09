@@ -12,7 +12,7 @@ fragment BaseStoryFragment on Story {
     }
 }
 query GetStories {
-    stories(pageSize: 16) {
+    stories(pageSize: 26) {
         results {
             ...BaseStoryFragment
         }

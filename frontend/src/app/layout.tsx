@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>News.ly Demo</title>
+        <title>ecolify Demo</title>
         {/*
 
         NOTE:

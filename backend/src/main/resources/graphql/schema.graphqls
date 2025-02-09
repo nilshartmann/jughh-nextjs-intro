@@ -4,10 +4,15 @@ interface Node {
     id: ID!
 }
 
-type Contact {
-    email: String
-    phone: String
+type EMailContact {
+    email: String!
 }
+
+type PhoneContact {
+    phone: String!
+}
+
+union Contact = EMailContact | PhoneContact
 
 type Writer implements Node {
     id: ID!
@@ -107,33 +112,41 @@ type Query {
     """
     stories(
         """Specify `orderBy` when you want a sorted list.
-           - If no `orderBy` is given, the list is ordered by date
+        - If no `orderBy` is given, the list is ordered by date
         """
         orderBy: StoryOrderBy
         """
         Defines the size of a page, i.e. the maximum number of stories returned by a query.
-          - If not specified, a default sensible value on serverside will be set
+        - If not specified, a default sensible value on serverside will be set
         """
         pageSize: Int,
         """
         Specifies the page that should be returned. This is a 1-based index, so the first page
         is requested using `page: 1`. The amount of stories per `page` is defined by the `pageSize`
         parameter.
-          - If not specified, page defaults to `1`
+        - If not specified, page defaults to `1`
         """
         page: Int
     ): StoriesResult!
 
     """
-    Returns the `Story` with the given `storyId` or `null` if there is no such story.
+    Returns the `Story` with the given `storyId`.
+
+    - If no `storyId` is provided, the _latest_ story will be returned
+    - If a `storyId` is provided, but there is no story with that id, `null` is returned
     """
-    story(storyId: ID!): Story
+    story(storyId: ID): Story
+
+    """Return all registered `Writers`"""
+    writers: [Writer!]!
 
     node(id: ID!): Node
 
     """For testing the API, returns a simple string"""
     hello: String!
 
+    """Returns a unique string for each request (for testing)"""
+    uuid: String!
 }
 
 input AddCommentInput {

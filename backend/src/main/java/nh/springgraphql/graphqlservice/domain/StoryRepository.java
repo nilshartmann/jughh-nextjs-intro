@@ -102,6 +102,13 @@ public class StoryRepository {
             .findAny();
     }
 
+    public List<Writer> findAllWriters() {
+        return this.stories.stream()
+            .map(Story::writer)
+            .distinct()
+            .toList();
+    }
+
 
     public List<Comment> findCommentsForStory(String storyId) {
         var story = findStory(storyId).orElseThrow(

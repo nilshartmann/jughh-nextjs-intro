@@ -1,0 +1,3 @@
+query Static01 {
+    uuid
+}

@@ -1,5 +1,5 @@
-import { twMerge } from "tailwind-merge";
 import { ReactNode } from "react";
+import { twMerge } from "tailwind-merge";
 
 type ButtonProps = {
   size?: "regular" | "lg";
@@ -17,7 +17,7 @@ export function Button({
   return (
     <span
       className={twMerge(
-        "font-barlow inline-flex transform items-center justify-center rounded px-4 py-2 font-normal text-white transition-all duration-500 ease-in-out hover:cursor-pointer hover:underline",
+        "inline-flex transform items-center justify-center rounded px-4 py-2 font-barlow font-normal text-white transition-all duration-500 ease-in-out hover:cursor-pointer hover:underline",
         // size === "lg" &&
         //   "border-red bg-red hover:border-red hover:bg-orange_2 hover:shadow-red mb-2 mt-2 border-2 p-4 text-2xl hover:shadow-2xl",
         size === "regular" && "mb-2 mt-2",
@@ -84,7 +84,7 @@ type PageButtonProps = {
 };
 export function PageButton({ state: { state, label } }: PageButtonProps) {
   const buttonClassName = twMerge(
-    "font-barlow inline-flex h-12 w-12 items-center justify-center rounded px-4 py-2 text-white",
+    "inline-flex h-12 w-12 items-center justify-center rounded px-4 py-2 font-barlow text-white",
     state === "selectable" &&
       "bg-orange_2 hover:bg-orange_2-500 hover:underline",
     state === "active" && "bg-green hover:bg-green underline",

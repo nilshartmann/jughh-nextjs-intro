@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState, useTransition } from "react";
+
+import { Button } from "@/components/Button";
+import { Input } from "@/components/Input";
 import LoadingIndicator from "@/components/LoadingIndicator";
 import { subscribeToNewsletter } from "@/components/newsly-actions";
-import { Input } from "@/components/Input";
-import { Button } from "@/components/Button";
 
 //⚠️ Diese Komponente funktioniert nur, wenn
 //   JavaScript eingeschaltet ist
@@ -32,7 +33,7 @@ export function NewsletterRegistration() {
 
   return (
     <div
-      className={"max-w-1/4 font-barlow flex items-center space-x-4 pe-2 ps-2"}
+      className={"max-w-1/4 flex items-center space-x-4 pe-2 ps-2 font-barlow"}
     >
       <div>Don't miss latest news. Subscribe to newsletter</div>
       <div className={"max-w-64"}>

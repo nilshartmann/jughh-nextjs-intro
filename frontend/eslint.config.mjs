@@ -31,7 +31,7 @@ const eslintConfig = [
       "prefer-const": "off",
     },
   }),
-  { ignores: ["_generated*"] },
+  { ignores: ["*/_generated*"] },
 ];
 
 export default eslintConfig;

@@ -2,10 +2,7 @@ package nh.springgraphql.graphqlservice.graphql;
 
 import graphql.GraphQLError;
 import graphql.schema.DataFetchingEnvironment;
-import nh.springgraphql.graphqlservice.domain.StoriesResult;
-import nh.springgraphql.graphqlservice.domain.StoryOrderBy;
-import nh.springgraphql.graphqlservice.domain.StoryRepository;
-import nh.springgraphql.graphqlservice.domain.Story;
+import nh.springgraphql.graphqlservice.domain.*;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.GraphQlExceptionHandler;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
@@ -13,10 +10,10 @@ import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.graphql.execution.ErrorType;
 import org.springframework.stereotype.Controller;
 
-import java.util.Arrays;
+import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
-
-import static nh.springgraphql.graphqlservice.config.Utils.sleep;
+import java.util.UUID;
 
 @Controller
 class QueryController {
@@ -33,7 +30,7 @@ class QueryController {
         var actualPage = page.orElse(1);
         var actualPageSize = pageSize.orElse(4);
 
-        if (actualPage<1) {
+        if (actualPage < 1) {
             throw new InvalidRequestException("Value for 'page' is invalid: '%s'. Must be at least '1'"
                 .formatted(actualPage));
         }
@@ -48,8 +45,26 @@ class QueryController {
     }
 
     @QueryMapping
-    Optional<Story> story(@Argument NodeId storyId) {
-        return this.storyRepository.findStory(storyId.id());
+    String uuid() {
+        return "%s at %s".formatted(
+            UUID.randomUUID().toString(),
+            LocalTime.now().toString()
+        );
+    }
+
+    @QueryMapping
+    List<Writer> writers() {
+        return storyRepository.findAllWriters();
+    }
+
+
+    @QueryMapping
+    Optional<Story> story(@Argument Optional<NodeId> storyId) {
+        return storyId
+            .map(NodeId::id)
+            .map(this.storyRepository::findStory)
+            .orElseGet(() -> Optional.ofNullable(this.storyRepository.findAllStories(StoryOrderBy.DATE, 1, 1).results().getFirst()))
+            ;
     }
 
     @SchemaMapping
@@ -59,7 +74,7 @@ class QueryController {
 
     @SchemaMapping
     long wordCount(Story story) {
-        long wordCount = story.body().chars().filter(ch -> ch == 'e').count()*10;
+        long wordCount = story.body().chars().filter(ch -> ch == 'e').count() * 10;
         return wordCount;
     }
 

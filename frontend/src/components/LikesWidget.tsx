@@ -1,8 +1,8 @@
 "use client";
 import { twMerge } from "tailwind-merge";
-import { useActionState } from "react";
-import { BaseStory } from "@/types";
+
 import { LikeIndicator } from "@/components/LoadingIndicator";
+import { BaseStory } from "@/types";
 
 type LikesWidgetProps = {
   story: BaseStory;
