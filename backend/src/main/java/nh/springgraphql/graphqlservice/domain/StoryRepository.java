@@ -106,6 +106,7 @@ public class StoryRepository {
         return this.stories.stream()
             .map(Story::writer)
             .distinct()
+            .sorted()
             .toList();
     }
 
