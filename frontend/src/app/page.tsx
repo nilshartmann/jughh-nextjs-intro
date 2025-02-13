@@ -1,29 +1,57 @@
-import { GetStoriesDocument } from "@/_generated-graphql-types";
-import StoryCard from "@/components/StoryCard";
-import { query } from "@/graphql-client";
+import Link from "next/link";
 
-export default async function Home() {
-  // const {} = await query({
-  //   query: GetSingleStoryDocument,
-  //   variables: {
-  //     storyId: "S:1",
-  //   },
-  // });
+import { Button } from "@/components/Button";
 
-  const { data } = await query({
-    query: GetStoriesDocument,
-  });
-
-  const f = data.stories.results.map((r) => r.title);
-
+export default function Home() {
   return (
-    <div className={"container mx-auto"}>
-      {/*<DummyLinks />*/}
-      <div className="mt-2 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {data.stories.results.map((s) => {
-          return <StoryCard key={s.id} story={s} />;
-        })}
+    <main
+      className={"min-w-screen flex-grow bg-cover"}
+      style={{
+        backgroundImage:
+          "radial-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)), url('/images/landing-page.jpg')",
+      }}
+    >
+      <div className="px-4 pt-32 text-center font-space font-bold">
+        <div
+          className={
+            "inline-block cursor-pointer rounded-xl bg-teal-100/30 p-4 text-8xl font-bold decoration-4 underline-offset-4 group-hover:text-sky-200"
+          }
+        >
+          <span className={"text-teal-600 group-hover:text-sky-200"}>eco</span>
+          lify
+        </div>
+        <h1>
+          <div
+            className={
+              "mt-10 inline-block rounded-xl bg-teal-100/40 p-4 font-opensans text-4xl group-hover:text-sky-200"
+            }
+          >
+            News for a{" "}
+            <span className={"text-teal-600 group-hover:text-sky-200"}>
+              greener
+            </span>{" "}
+            world
+          </div>
+        </h1>
+
+        <div className="mx-auto mt-10 max-w-2xl rounded-xl bg-teal-100/40 p-4 font-barlow text-xl font-normal tracking-wide">
+          <p>
+            There are a lot of news sites. But only this one is rendered with
+            modern{" "}
+            <span className="relative font-bold text-teal-700">
+              frontend and backend
+            </span>{" "}
+            services.
+          </p>
+        </div>
+        <div className="mt-10 flex justify-center">
+          <Button size={"lg"}>
+            <Link href={"/stories"} prefetch={false}>
+              Let me in - I want to read more! 😻
+            </Link>
+          </Button>
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
