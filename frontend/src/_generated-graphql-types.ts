@@ -57,9 +57,10 @@ export type G_Comment = G_Node & {
   text: Scalars['String']['output'];
 };
 
-export type G_Contact = {
-  email?: Maybe<Scalars['String']['output']>;
-  phone?: Maybe<Scalars['String']['output']>;
+export type G_Contact = G_EMailContact | G_PhoneContact;
+
+export type G_EMailContact = {
+  email: Scalars['String']['output'];
 };
 
 export type G_Image = {
@@ -85,16 +86,27 @@ export type G_Node = {
   id: Scalars['ID']['output'];
 };
 
+export type G_PhoneContact = {
+  phone: Scalars['String']['output'];
+};
+
 export type G_Query = {
   /** For testing the API, returns a simple string */
   hello: Scalars['String']['output'];
   node?: Maybe<G_Node>;
   /** Returns a list of stories */
   stories: G_StoriesResult;
-  /** Returns the `Story` with the given `storyId` or `null` if there is no such story. */
+  /**
+   * Returns the `Story` with the given `storyId`.
+   *
+   * - If no `storyId` is provided, the _latest_ story will be returned
+   * - If a `storyId` is provided, but there is no story with that id, `null` is returned
+   */
   story?: Maybe<G_Story>;
   /** Returns a unique string for each request (for testing) */
   uuid: Scalars['String']['output'];
+  /** Return all registered `Writers` */
+  writers: Array<G_Writer>;
 };
 
 
@@ -111,7 +123,7 @@ export type G_QueryStoriesArgs = {
 
 
 export type G_QueryStoryArgs = {
-  storyId: Scalars['ID']['input'];
+  storyId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type G_StoriesResult = {
