@@ -3,6 +3,8 @@ package nh.springgraphql.graphqlservice.domain;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Article {
     private final String id;
@@ -19,7 +21,7 @@ public class Article {
         this.date = date;
         this.title = title;
         this.body = body;
-        this.comments = comments;
+        this.comments = new CopyOnWriteArrayList<>(comments);
         this.category = category;
         this.writer = writer;
         this.likes = likes;
@@ -57,8 +59,19 @@ public class Article {
         return likes;
     }
 
+    public synchronized Comment addComment(String text) {
+        var newComment = new Comment(
+            UUID.randomUUID().toString(),
+            text
+        );
+
+        comments().add(newComment);
+
+        return newComment;
+    }
+
     public void increaseLike() {
-        this.likes = this.likes + 1;
+        this.likes++;
     }
 
     @Override

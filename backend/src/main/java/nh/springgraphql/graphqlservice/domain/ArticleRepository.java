@@ -12,10 +12,6 @@ import java.util.Optional;
  * In real life, that would be a database, remote service, ... <br/>
  * Also it would maybe be splitted into multiple parts: Articles, Comments, ExcerptService, ...
  * </p>
- * <p>
- * This is <b>not threadsafe</b>. While you can access the repository with multiple read requests in parallel,
- * writing (add new comments) might fail
- * </p>
  */
 @Component
 public class ArticleRepository {
@@ -128,12 +124,7 @@ public class ArticleRepository {
             throw new IllegalStateException("Please enter at least five chars for a comment");
         }
 
-        var newComment = new Comment(
-            newCommentId(),
-            text
-        );
-
-        article.comments().add(newComment);
+        var newComment = article.addComment(text);
 
         return newComment;
     }
