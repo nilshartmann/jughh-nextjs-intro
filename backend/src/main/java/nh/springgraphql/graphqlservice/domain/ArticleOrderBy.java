@@ -4,8 +4,8 @@ import java.util.Comparator;
 
 public enum ArticleOrderBy {
     DATE(Comparator.comparing(Article::date).reversed()),
-    LIKES(Comparator.comparingInt(Article::likes).reversed()),
-    CATEGORY(Comparator.comparing(Article::category).reversed());
+    LIKES(Comparator.comparingInt(Article::likes).thenComparing(Article::date).reversed()),
+    CATEGORY(Comparator.comparing(Article::category).thenComparing(Article::date).reversed());
 
     public final Comparator<Article> comparator;
 

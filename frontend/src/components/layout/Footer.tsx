@@ -8,7 +8,7 @@ export default function Footer({ variant = "solid" }: FooterProps) {
     <footer
       className={twMerge(
         "h-12 font-inter text-sm text-teal-50",
-        variant === "solid" ? "bg-teal-700" : "bg-teal-600/60",
+        variant === "solid" ? "mt-4 bg-teal-900" : "bg-teal-600/60",
       )}
     >
       <div

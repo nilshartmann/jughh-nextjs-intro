@@ -7,8 +7,8 @@ export default function ArticlesLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className={"flex flex-grow flex-col justify-between"}>
-      <div className={"space-y-8"}>
+    <main className={"ArticlesLayout flex flex-grow flex-col justify-between"}>
+      <div className={"space-y-4"}>
         <ArticlesHeader />
         {children}
       </div>

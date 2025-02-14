@@ -32,12 +32,15 @@ public class ArticleRepository {
 
         var prevPage = page > 1 ? page - 1 : null;
         var nextPage = (zeroBasedPage + 1) * pageSize < articles.size() ? page + 1 : null;
+        var totalPages = articles.isEmpty() ? 0 : (articles.size() + pageSize - 1) / pageSize;
+
 
         return new ArticlesResult(
             page, pageSize,
             orderBy,
             Optional.ofNullable(prevPage),
             Optional.ofNullable(nextPage),
+            totalPages,
             sortedArticles
         );
     }

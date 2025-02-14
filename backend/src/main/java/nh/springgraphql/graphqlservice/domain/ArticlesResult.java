@@ -8,6 +8,7 @@ public record ArticlesResult(
     ArticleOrderBy orderBy,
     Optional<Integer> prevPage,
     Optional<Integer> nextPage,
+    int totalPages,
     List<Article> results
 ) {
 }

@@ -18,15 +18,16 @@ export function Button({
     <span
       className={twMerge(
         "inline-flex transform items-center justify-center rounded px-4 py-2 font-barlow font-normal text-white transition-all duration-500 ease-in-out hover:cursor-pointer hover:underline",
+        "border-teal-700 bg-teal-600 hover:bg-teal-700",
         size === "lg" &&
-          "mb-2 mt-2 rounded-xl border-2 border-teal-700 bg-teal-600 p-4 text-2xl underline-offset-8 hover:bg-teal-700 hover:drop-shadow-2xl",
+          "mb-2 mt-2 rounded-xl border-2 p-4 text-2xl underline-offset-8 hover:drop-shadow-2xl",
         size === "regular" && "mb-2 mt-2",
-        size === "regular" && "bg-amber-600 p-2 hover:bg-amber-500",
+        // size === "regular" && "bg-amber-600 p-2 hover:bg-amber-500",
         size === "regular" &&
           checked &&
-          "bg-green hover:bg-green hover:cursor-default hover:no-underline",
+          "hover:bg-border-teal-900 bg-teal-900 hover:cursor-default hover:no-underline",
         disabled &&
-          "cursor-default bg-orange-200 hover:cursor-default hover:bg-orange-200",
+          "cursor-default bg-stone-300 hover:cursor-default hover:bg-stone-300 hover:no-underline",
       )}
     >
       {children}
@@ -84,11 +85,10 @@ type PageButtonProps = {
 };
 export function PageButton({ state: { state, label } }: PageButtonProps) {
   const buttonClassName = twMerge(
-    "inline-flex h-12 w-12 items-center justify-center rounded px-4 py-2 font-barlow text-white",
-    state === "selectable" &&
-      "bg-orange_2 hover:bg-orange_2-500 hover:underline",
-    state === "active" && "bg-green hover:bg-green underline",
-    state === "disabled" && "bg-gray-300",
+    "inline-flex h-12 w-12 items-center justify-center rounded px-4 py-2 font-barlow text-white underline-offset-4 transition-all duration-500 ease-in-out",
+    state === "selectable" && "bg-teal-600 hover:bg-teal-700 hover:underline",
+    state === "active" && "bg-teal-900 underline hover:bg-teal-900",
+    state === "disabled" && "bg-stone-300",
   );
   return <span className={buttonClassName}>{label}</span>;
 }

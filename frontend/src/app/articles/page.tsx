@@ -1,15 +1,33 @@
 import ArticleCard from "@/components/ArticleCard";
-import GridLayout from "@/components/layout/Grid";
+import ArticleListGrid from "@/components/articlelist/ArticleListGrid";
+import ArticleListNavBar from "@/components/articlelist/ArticleListNavBar";
+import ArticleListPaginationBar from "@/components/articlelist/ArticleListPaginationBar";
 import { fetchArticles } from "@/queries/queries";
 
-export default async function ArticleListPage() {
-  const data = await fetchArticles();
+type ArticleListPageProps = {
+  searchParams: Promise<Record<string, string>>;
+};
+export default async function ArticleListPage({
+  searchParams,
+}: ArticleListPageProps) {
+  const { orderBy, page } = await searchParams;
+
+  const data = await fetchArticles(page, orderBy);
 
   return (
-    <GridLayout>
-      {data.articles.results.map((a) => {
-        return <ArticleCard key={a.id} article={a} />;
-      })}
-    </GridLayout>
+    <div className={"container mx-auto space-y-4"}>
+      <ArticleListNavBar />
+
+      <ArticleListGrid>
+        {data.articles.results.map((a) => {
+          return <ArticleCard key={a.id} article={a} />;
+        })}
+      </ArticleListGrid>
+
+      <ArticleListPaginationBar
+        pageable={data.articles}
+        params={searchParams}
+      />
+    </div>
   );
 }

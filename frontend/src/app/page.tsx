@@ -16,7 +16,7 @@ export default function LandingPage() {
         <div className="space-y-16 px-4 pt-32 text-center font-space font-bold">
           <div
             className={
-              "inline-block cursor-pointer rounded-xl bg-teal-100/30 p-4 text-8xl font-bold decoration-4 underline-offset-4 group-hover:text-sky-200"
+              "inline-block rounded-xl bg-teal-100/30 p-4 text-8xl font-bold decoration-4 underline-offset-4 group-hover:text-sky-200"
             }
           >
             <span className={"text-teal-600 group-hover:text-sky-200"}>

@@ -99,6 +99,11 @@ type ArticlesResult {
     prevPage: Int
 
     """
+    Number of pages with the given page size
+    """
+    totalPages: Int!
+
+    """
     List of articles matching the query
     """
     results: [Article!]!
