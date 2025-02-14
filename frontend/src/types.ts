@@ -9,3 +9,7 @@ export type BaseArticle = {
   image?: { uri: string };
   writer: { name: string };
 };
+
+export type Article = BaseArticle & {
+  body: string;
+};

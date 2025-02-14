@@ -16,8 +16,13 @@ export function H1({ children, className }: HeadingProps) {
 
 export function H2({ children, className }: HeadingProps) {
   return (
-    <h1 className={twMerge("font-space text-2xl font-bold", className)}>
+    <h2
+      className={twMerge(
+        "font-space text-2xl font-bold text-teal-700",
+        className,
+      )}
+    >
       {children}
-    </h1>
+    </h2>
   );
 }

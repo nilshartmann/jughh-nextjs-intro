@@ -23,6 +23,7 @@ type Writer implements Node {
 type Comment implements Node {
     id: ID!
     text: String!
+    writer: String!
 
     article: Article!
 }

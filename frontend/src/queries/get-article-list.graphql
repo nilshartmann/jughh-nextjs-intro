@@ -1,0 +1,8 @@
+query GetArticleList($orderBy: ArticleOrderBy, $page: Int! ) {
+    articles(page: $page, orderBy: $orderBy, pageSize: 6) {
+        totalPages
+        results {
+            ...BaseArticleFragment
+        }
+    }
+}

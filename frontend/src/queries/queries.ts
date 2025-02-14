@@ -1,15 +1,17 @@
 import {
   G_ArticleOrderBy,
-  GetArticlesDocument,
+  GetArticleDocument,
+  GetArticleListDocument,
+  GetCommentListDocument,
 } from "@/_generated-graphql-types";
 import { query } from "@/graphql-client";
 
-export async function fetchArticles(
+export async function fetchArticleList(
   page: string | number | undefined | null = 1,
   orderBy: string | undefined | null = "DATE",
 ) {
   const { data } = await query({
-    query: GetArticlesDocument,
+    query: GetArticleListDocument,
     variables: {
       orderBy: getValidOrderBy(orderBy),
       page: getValidPage(page),
@@ -17,6 +19,28 @@ export async function fetchArticles(
   });
 
   return data;
+}
+
+export async function fetchArticle(articleId: string) {
+  const { data } = await query({
+    query: GetArticleDocument,
+    variables: {
+      articleId,
+    },
+  });
+
+  return data.article;
+}
+
+export async function fetchComments(articleId: string) {
+  const { data } = await query({
+    query: GetCommentListDocument,
+    variables: {
+      articleId,
+    },
+  });
+
+  return data.article?.comments || [];
 }
 
 function getValidPage(p: string | number | undefined | null): number {

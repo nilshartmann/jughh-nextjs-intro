@@ -62,6 +62,7 @@ public class Article {
     public synchronized Comment addComment(String text) {
         var newComment = new Comment(
             UUID.randomUUID().toString(),
+            "",
             text
         );
 

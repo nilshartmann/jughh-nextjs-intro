@@ -2,7 +2,7 @@ import ArticleCard from "@/components/ArticleCard";
 import ArticleListGrid from "@/components/articlelist/ArticleListGrid";
 import ArticleListNavBar from "@/components/articlelist/ArticleListNavBar";
 import ArticleListPaginationBar from "@/components/articlelist/ArticleListPaginationBar";
-import { fetchArticles } from "@/queries/queries";
+import { fetchArticleList } from "@/queries/queries";
 
 type ArticleListPageProps = {
   searchParams: Promise<Record<string, string>>;
@@ -12,7 +12,7 @@ export default async function ArticleListPage({
 }: ArticleListPageProps) {
   const { orderBy, page } = await searchParams;
 
-  const data = await fetchArticles(page, orderBy);
+  const data = await fetchArticleList(page, orderBy);
 
   return (
     <div className={"container mx-auto space-y-4"}>
