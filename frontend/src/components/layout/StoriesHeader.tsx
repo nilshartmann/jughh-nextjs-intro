@@ -6,7 +6,7 @@ import Breaking from "@/components/Breaking";
 
 export default function StoriesHeader() {
   return (
-    <header className={"global-header mb-8 flex h-36 items-center"}>
+    <header className={"global-header flex h-36 items-center"}>
       <div className={"mx-auto w-full max-w-screen-lg"}>
         <div className={"flex items-center justify-between font-bold"}>
           <Link href={"/stories"} prefetch={false}>
