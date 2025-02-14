@@ -12,12 +12,12 @@ export default function StoriesHeader() {
           <Link href={"/stories"} prefetch={false}>
             <div
               className={
-                "group flex items-center space-x-4 rounded-lg bg-teal-100/30 p-4 font-space hover:bg-teal-600/40"
+                "group flex items-start space-x-4 rounded-lg bg-teal-100/30 p-4 font-space hover:bg-teal-600/40"
               }
             >
               <div
                 className={
-                  "cursor-pointer text-4xl font-bold decoration-4 underline-offset-4 group-hover:text-sky-200"
+                  "cursor-pointer text-5xl font-bold decoration-4 underline-offset-4 group-hover:text-sky-200"
                 }
               >
                 <span className={"text-teal-600 group-hover:text-sky-200"}>
@@ -25,12 +25,19 @@ export default function StoriesHeader() {
                 </span>
                 lify
               </div>
-              <div className={"font-opensans text-lg group-hover:text-sky-200"}>
-                News for a{" "}
-                <span className={"text-teal-600 group-hover:text-sky-200"}>
-                  greener
-                </span>{" "}
-                world
+              <div className={"flex flex-col items-start"}>
+                <div
+                  className={"font-opensans text-lg group-hover:text-sky-200"}
+                >
+                  News for a{" "}
+                  <span className={"text-teal-600 group-hover:text-sky-200"}>
+                    greener
+                  </span>{" "}
+                  world
+                </div>
+                <div className={"text-sm group-hover:text-sky-200"}>
+                  <span className={"underline"}>Next.js</span> Edition
+                </div>
               </div>
             </div>
           </Link>

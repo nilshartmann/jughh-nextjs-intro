@@ -11,8 +11,8 @@ fragment BaseStoryFragment on Story {
         name
     }
 }
-query GetStories {
-    stories(pageSize: 26) {
+query GetStories($orderBy: StoryOrderBy, $page: Int! ) {
+    stories(page: $page, orderBy: $orderBy, pageSize: 6) {
         results {
             ...BaseStoryFragment
         }

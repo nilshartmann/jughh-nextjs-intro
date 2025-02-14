@@ -6,6 +6,8 @@ import {
   registerApolloClient,
 } from "@apollo/experimental-nextjs-app-support";
 
+import { demoSlowdown } from "@/demo-config";
+
 const httpLink = new HttpLink({
   // this needs to be an absolute url, as relative urls cannot be used in SSR
   uri: "http://localhost:20080/graphql",
@@ -13,15 +15,29 @@ const httpLink = new HttpLink({
   // (this does not work if you are rendering your page with
   // `export const dynamic = "force-static"`)
   // fetchOptions: { cache: "no-store" },
-  fetchOptions: { cache: "force-cache" },
+  // fetchOptions: { cache: "force-cache" },
 });
 
-const authLink = setContext((_request, currentContext) => {
-  console.log("EXECUTING OPERATION ", _request.operationName);
+const slowdownLink = setContext((_request, currentContext) => {
+  const opName = _request.operationName;
+  console.log("GraphQL Operation", opName);
+
+  if (!opName) {
+    return currentContext;
+  }
+
+  const slowdown = demoSlowdown[opName];
+  if (!slowdown) {
+    return currentContext;
+  }
+
+  console.info("Slowdown GraphQL operation", opName, slowdown + "ms");
+
   return {
     ...currentContext,
     headers: {
       ...currentContext.headers,
+      slowdown,
     },
   };
 });
@@ -29,6 +45,6 @@ const authLink = setContext((_request, currentContext) => {
 export const { getClient, query, PreloadQuery } = registerApolloClient(() => {
   return new ApolloClient({
     cache: new InMemoryCache(),
-    link: authLink.concat(httpLink),
+    link: slowdownLink.concat(httpLink),
   });
 });

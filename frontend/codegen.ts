@@ -14,6 +14,7 @@ const config: CodegenConfig = {
         scalars: {
           DateTime: "string",
         },
+        enumsAsTypes: true,
         inlineFragmentTypes: "combine",
         // extractAllFieldsToTypes: true,
         omitOperationSuffix: true,
