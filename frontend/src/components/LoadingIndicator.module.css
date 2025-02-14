@@ -14,8 +14,8 @@
 }
 
 .Spinner h1 {
-  font-family: barlow, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: barlow, ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 1.875rem;
   line-height: 2.25rem;
   font-weight: 500;
@@ -54,7 +54,8 @@
 
 .Spinner.secondary > .bounce.fill {
   font-size: 1rem;
-  background-color: var(--color-text);
+  /* teal-50 */
+  background-color: #f0fdfa;
 }
 
 .Spinner .bounce1 {

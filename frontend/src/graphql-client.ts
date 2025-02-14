@@ -6,7 +6,7 @@ import {
   registerApolloClient,
 } from "@apollo/experimental-nextjs-app-support";
 
-import { demoSlowdown } from "@/demo-config";
+import { demoConfig } from "@/demo-config";
 
 const httpLink = new HttpLink({
   // this needs to be an absolute url, as relative urls cannot be used in SSR
@@ -26,7 +26,7 @@ const slowdownLink = setContext((_request, currentContext) => {
     return currentContext;
   }
 
-  const slowdown = demoSlowdown[opName];
+  const slowdown = demoConfig[opName];
   if (!slowdown) {
     return currentContext;
   }
