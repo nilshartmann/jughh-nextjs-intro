@@ -9,6 +9,6 @@
  *
  */
 export const demoSlowdown: Record<string, number> = {
-  /** query on /stories */
-  GetStories: 0,
+  /** query on /articles */
+  GetArticles: 0,
 };

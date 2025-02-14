@@ -1,12 +1,12 @@
-import { GetStoriesDocument } from "@/_generated-graphql-types";
+import { GetArticlesDocument } from "@/_generated-graphql-types";
 import { query } from "@/graphql-client";
 
-export async function fetchStories(
+export async function fetchArticles(
   page: number = 1,
   orderBy: "CATEGORY" = "CATEGORY",
 ) {
   const { data } = await query({
-    query: GetStoriesDocument,
+    query: GetArticlesDocument,
     variables: {
       orderBy: orderBy,
       page: page,

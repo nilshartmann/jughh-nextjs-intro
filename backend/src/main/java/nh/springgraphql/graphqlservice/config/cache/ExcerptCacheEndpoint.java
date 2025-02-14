@@ -24,7 +24,7 @@ import java.util.Map;
 class ExcerptCacheEndpoint {
 
     /**
-     * Muss zum @Cacheable im StoryRepository passen
+     * Muss zum @Cacheable im ArticleRepository passen
      */
     private final static String excerptCacheName = "excerpt-cache";
 

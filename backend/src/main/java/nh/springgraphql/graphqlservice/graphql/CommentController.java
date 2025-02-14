@@ -1,9 +1,8 @@
 package nh.springgraphql.graphqlservice.graphql;
 
+import nh.springgraphql.graphqlservice.domain.Article;
+import nh.springgraphql.graphqlservice.domain.ArticleRepository;
 import nh.springgraphql.graphqlservice.domain.Comment;
-import nh.springgraphql.graphqlservice.domain.Story;
-import nh.springgraphql.graphqlservice.domain.StoryRepository;
-import org.springframework.context.annotation.Bean;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
@@ -12,15 +11,15 @@ import java.util.Optional;
 @Controller
 class CommentController {
 
-    private final StoryRepository storyRepository;
+    private final ArticleRepository articleRepository;
 
-    CommentController(StoryRepository storyRepository) {
-        this.storyRepository = storyRepository;
+    CommentController(ArticleRepository articleRepository) {
+        this.articleRepository = articleRepository;
     }
 
     @SchemaMapping
-    Optional<Story> story(Comment comment) {
-        return storyRepository.findStoryForComment(comment.id());
+    Optional<Article> article(Comment comment) {
+        return articleRepository.findArticleForComment(comment.id());
 
     }
 

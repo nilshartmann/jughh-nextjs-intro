@@ -1,7 +1,7 @@
 package nh.springgraphql.graphqlservice.graphql;
 
 import nh.springgraphql.graphqlservice.domain.Comment;
-import nh.springgraphql.graphqlservice.domain.Story;
+import nh.springgraphql.graphqlservice.domain.Article;
 import nh.springgraphql.graphqlservice.domain.Writer;
 import org.springframework.core.convert.converter.Converter;
 
@@ -26,8 +26,8 @@ public record NodeId(String typeName, String id) {
 
 
     static NodeId forNode(Object o) {
-        if (o instanceof Story s) {
-            return new NodeId("S", s.id());
+        if (o instanceof Article a) {
+            return new NodeId("A", a.id());
         }
 
         if (o instanceof Comment c) {

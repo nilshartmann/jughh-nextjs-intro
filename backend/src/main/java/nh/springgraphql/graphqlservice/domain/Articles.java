@@ -5,15 +5,15 @@ import java.time.ZoneOffset;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Stories {
+public class Articles {
 
-    public static List<Story> generateSampleStories() {
+    public static List<Article> generateSampleArticles() {
         Writer writer1 = new Writer("1", "Alice Johnson", Contact.ofEmail("alice@example.com"));
         Writer writer2 = new Writer("2", "Bob Smith", Contact.ofPhone("+987654321"));
         Writer writer3 = new Writer("3", "Charlie Davis", Contact.ofEmail("charlie@example.com"));
 
         return new LinkedList<>(List.of(
-            new Story(
+            new Article(
                 "1",
                 OffsetDateTime.of(2023, 10, 15, 14, 0, 0, 0, ZoneOffset.ofHours(2)),
                 "AI Revolutionizing Healthcare",
@@ -35,7 +35,7 @@ public class Stories {
                 writer1,
                 120
             ),
-            new Story(
+            new Article(
                 "2",
                 OffsetDateTime.of(2025, 1, 13, 10, 30, 0, 0, ZoneOffset.ofHours(1)),
                 "Climate Change and Renewable Energy",
@@ -56,7 +56,7 @@ public class Stories {
                 writer2,
                 95
             ),
-            new Story(
+            new Article(
                 "3",
                 OffsetDateTime.of(2024, 8, 5, 16, 45, 0, 0, ZoneOffset.ofHours(3)),
                 "The Next Digital Revolution",
@@ -78,7 +78,7 @@ public class Stories {
                 writer3,
                 210
             ),
-            new Story(
+            new Article(
                 "4",
                 OffsetDateTime.of(2024, 7, 10, 9, 15, 0, 0, ZoneOffset.ofHours(2)),
                 "The Rise of Electric Vehicles",
@@ -100,7 +100,7 @@ public class Stories {
                 writer1,
                 180
             ),
-            new Story(
+            new Article(
                 "5",
                 OffsetDateTime.of(2024, 7, 25, 12, 0, 0, 0, ZoneOffset.ofHours(4)),
                 "New Discoveries in Marine Biology",
@@ -121,7 +121,7 @@ public class Stories {
                 writer2,
                 160
             ),
-            new Story(
+            new Article(
                 "6",
                 OffsetDateTime.of(2024, 7, 17, 18, 20, 0, 0, ZoneOffset.ofHours(0)),
                 "Sustainable Farming and Vertical Agriculture",
@@ -142,7 +142,7 @@ public class Stories {
                 writer3,
                 175
             ),
-            new Story(
+            new Article(
                 "7",
                 OffsetDateTime.of(2024, 4, 15, 10, 0, 0, 0, ZoneOffset.ofHours(2)),
                 "Space Exploration: Next Stop Europa",
@@ -162,7 +162,7 @@ public class Stories {
                 writer1,
                 190
             ),
-            new Story(
+            new Article(
                 "8",
                 OffsetDateTime.of(2024, 3, 22, 14, 30, 0, 0, ZoneOffset.ofHours(1)),
                 "Advancements in Wind Energy Technology",
@@ -182,7 +182,7 @@ public class Stories {
                 writer2,
                 165
             ),
-            new Story(
+            new Article(
                 "9",
                 OffsetDateTime.of(2024, 2, 10, 11, 15, 0, 0, ZoneOffset.ofHours(3)),
                 "CRISPR Gene Editing Breakthrough",
@@ -203,7 +203,7 @@ public class Stories {
                 writer3,
                 220
             ),
-            new Story(
+            new Article(
                 "10",
                 OffsetDateTime.of(2024, 1, 5, 9, 45, 0, 0, ZoneOffset.ofHours(0)),
                 "Urban Forests: The Future of Green Cities",
@@ -223,7 +223,7 @@ public class Stories {
                 writer1,
                 140
             ),
-            new Story(
+            new Article(
                 "11",
                 OffsetDateTime.of(2023, 12, 15, 16, 0, 0, 0, ZoneOffset.ofHours(2)),
                 "Revolutionizing Water Purification",
@@ -244,7 +244,7 @@ public class Stories {
                 writer2,
                 130
             ),
-            new Story(
+            new Article(
                 "12",
                 OffsetDateTime.of(2023, 11, 3, 12, 20, 0, 0, ZoneOffset.ofHours(1)),
                 "Biodiversity Conservation Efforts Gain Momentum",
@@ -265,7 +265,7 @@ public class Stories {
                 185
             )
             ,
-            new Story(
+            new Article(
                 "13",
                 OffsetDateTime.of(2023, 10, 12, 15, 30, 0, 0, ZoneOffset.ofHours(2)),
                 "AI-Powered Assistants in Education",
@@ -287,7 +287,7 @@ public class Stories {
                 writer1,
                 155
             ),
-            new Story(
+            new Article(
                 "14",
                 OffsetDateTime.of(2025, 1, 5, 11, 45, 0, 0, ZoneOffset.ofHours(1)),
                 "The Impact of Reforestation on Climate Change",
@@ -308,7 +308,7 @@ public class Stories {
                 writer2,
                 180
             ),
-            new Story(
+            new Article(
                 "15",
                 OffsetDateTime.of(2023, 8, 18, 17, 15, 0, 0, ZoneOffset.ofHours(3)),
                 "Breakthrough in Battery Storage Technology",
@@ -329,7 +329,7 @@ public class Stories {
                 writer3,
                 205
             ),
-            new Story(
+            new Article(
                 "16",
                 OffsetDateTime.of(2025, 1, 15, 14, 10, 0, 0, ZoneOffset.ofHours(0)),
                 "Coral Reef Restoration: A Race Against Time",
@@ -350,7 +350,7 @@ public class Stories {
                 writer2,
                 175
             ),
-            new Story(
+            new Article(
                 "17",
                 OffsetDateTime.of(2023, 6, 15, 13, 45, 0, 0, ZoneOffset.ofHours(2)),
                 "The Role of Wetlands in Climate Protection",
@@ -370,7 +370,7 @@ public class Stories {
                 writer1,
                 165
             ),
-            new Story(
+            new Article(
                 "18",
                 OffsetDateTime.of(2023, 5, 20, 10, 10, 0, 0, ZoneOffset.ofHours(1)),
                 "NASA's Search for Exoplanets Continues",
@@ -390,7 +390,7 @@ public class Stories {
                 writer2,
                 220
             ),
-            new Story(
+            new Article(
                 "19",
                 OffsetDateTime.of(2023, 4, 10, 15, 20, 0, 0, ZoneOffset.ofHours(3)),
                 "Saving Endangered Pollinators",
@@ -410,7 +410,7 @@ public class Stories {
                 writer3,
                 195
             ),
-            new Story(
+            new Article(
                 "20",
                 OffsetDateTime.of(2023, 3, 8, 9, 30, 0, 0, ZoneOffset.ofHours(0)),
                 "Microplastics Found in the Deep Ocean",
@@ -431,7 +431,7 @@ public class Stories {
                 writer1,
                 180
             ),
-            new Story(
+            new Article(
                 "21",
                 OffsetDateTime.of(2023, 2, 12, 12, 50, 0, 0, ZoneOffset.ofHours(1)),
                 "Geoengineering: A Last Resort for Climate Change?",
@@ -451,7 +451,7 @@ public class Stories {
                 writer2,
                 170
             ),
-            new Story(
+            new Article(
                 "22",
                 OffsetDateTime.of(2023, 1, 3, 16, 40, 0, 0, ZoneOffset.ofHours(2)),
                 "Revolution in Ocean Farming",

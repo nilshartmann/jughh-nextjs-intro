@@ -21,7 +21,7 @@ export type G_AddCommentError = {
 };
 
 export type G_AddCommentInput = {
-  storyId: Scalars['ID']['input'];
+  articleId: Scalars['ID']['input'];
   text: Scalars['String']['input'];
 };
 
@@ -36,13 +36,74 @@ export type G_AddLikeError = {
 };
 
 export type G_AddLikeInput = {
-  storyId: Scalars['ID']['input'];
+  articleId: Scalars['ID']['input'];
 };
 
 export type G_AddLikePayload = G_AddLikeError | G_AddLikeSuccess;
 
 export type G_AddLikeSuccess = {
-  story: G_Story;
+  article: G_Article;
+};
+
+export type G_Article = G_Node & {
+  body: Scalars['String']['output'];
+  category: G_Category;
+  comments: Array<G_Comment>;
+  date: Scalars['DateTime']['output'];
+  /** Returns an excerpt of this article, with a maximum length of `maxLength` characters. */
+  excerpt: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  image?: Maybe<G_Image>;
+  likes: Scalars['Int']['output'];
+  title: Scalars['String']['output'];
+  /**
+   * Returns the number of words of this article.
+   *
+   * Note: **for demo purposes to make values more realistic, the values returned do  _not match_ the real number of words!**
+   */
+  wordCount: Scalars['Int']['output'];
+  writer: G_Writer;
+};
+
+
+export type G_ArticleExcerptArgs = {
+  maxLength?: Scalars['Int']['input'];
+};
+
+/** Defines all fields that can be used to sort the list of articles */
+export type G_ArticleOrderBy =
+  | 'CATEGORY'
+  | 'DATE'
+  | 'LIKES';
+
+export type G_ArticlesResult = {
+  /** Number of the next page or empty if there is no next page */
+  nextPage?: Maybe<Scalars['Int']['output']>;
+  /**
+   * The field that is used to sort the resulting articles from the request
+   *
+   * If the request doesn't specified an `orderBy`, it's set to the applied default value by the server.
+   */
+  orderBy: G_ArticleOrderBy;
+  /**
+   * Number of the requested page.
+   *
+   * If the request doesn't specified a page, it's set to the applied default value by the server.
+   */
+  page: Scalars['Int']['output'];
+  /**
+   * Size of the requested page (i.e. maximum number of `Article` objects returned)
+   *
+   * If the request doesn't specified a page, it's set to the applied default value by the server.
+   */
+  pageSize: Scalars['Int']['output'];
+  /**
+   * Number of the previous page or empty when the returned page is the first page, so that there
+   * is no previous page
+   */
+  prevPage?: Maybe<Scalars['Int']['output']>;
+  /** List of articles matching the query */
+  results: Array<G_Article>;
 };
 
 export type G_Category =
@@ -51,8 +112,8 @@ export type G_Category =
   | 'TECHNOLOGY';
 
 export type G_Comment = G_Node & {
+  article: G_Article;
   id: Scalars['ID']['output'];
-  story: G_Story;
   text: Scalars['String']['output'];
 };
 
@@ -90,18 +151,18 @@ export type G_PhoneContact = {
 };
 
 export type G_Query = {
+  /**
+   * Returns the `Article` with the given `articleId`.
+   *
+   * - If no `articleId` is provided, the _latest_ article will be returned
+   * - If a `articleId` is provided, but there is no article with that id, `null` is returned
+   */
+  article?: Maybe<G_Article>;
+  /** Returns a list of articles */
+  articles: G_ArticlesResult;
   /** For testing the API, returns a simple string */
   hello: Scalars['String']['output'];
   node?: Maybe<G_Node>;
-  /** Returns a list of stories */
-  stories: G_StoriesResult;
-  /**
-   * Returns the `Story` with the given `storyId`.
-   *
-   * - If no `storyId` is provided, the _latest_ story will be returned
-   * - If a `storyId` is provided, but there is no story with that id, `null` is returned
-   */
-  story?: Maybe<G_Story>;
   /** Returns a unique string for each request (for testing) */
   uuid: Scalars['String']['output'];
   /** Return all registered `Writers` */
@@ -109,82 +170,21 @@ export type G_Query = {
 };
 
 
-export type G_QueryNodeArgs = {
-  id: Scalars['ID']['input'];
+export type G_QueryArticleArgs = {
+  articleId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
-export type G_QueryStoriesArgs = {
-  orderBy?: InputMaybe<G_StoryOrderBy>;
+export type G_QueryArticlesArgs = {
+  orderBy?: InputMaybe<G_ArticleOrderBy>;
   page?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
-export type G_QueryStoryArgs = {
-  storyId?: InputMaybe<Scalars['ID']['input']>;
+export type G_QueryNodeArgs = {
+  id: Scalars['ID']['input'];
 };
-
-export type G_StoriesResult = {
-  /** Number of the next page or empty if there is no next page */
-  nextPage?: Maybe<Scalars['Int']['output']>;
-  /**
-   * The field that is used to sort the resulting stories from the request
-   *
-   * If the request doesn't specified an `orderBy`, it's set to the applied default value by the server.
-   */
-  orderBy: G_StoryOrderBy;
-  /**
-   * Number of the requested page.
-   *
-   * If the request doesn't specified a page, it's set to the applied default value by the server.
-   */
-  page: Scalars['Int']['output'];
-  /**
-   * Size of the requested page (i.e. maximum number of `Story` objects returned)
-   *
-   * If the request doesn't specified a page, it's set to the applied default value by the server.
-   */
-  pageSize: Scalars['Int']['output'];
-  /**
-   * Number of the previous page or empty when the returned page is the first page, so that there
-   * is no previous page
-   */
-  prevPage?: Maybe<Scalars['Int']['output']>;
-  /** List of Storys matching the query */
-  results: Array<G_Story>;
-};
-
-export type G_Story = G_Node & {
-  body: Scalars['String']['output'];
-  category: G_Category;
-  comments: Array<G_Comment>;
-  date: Scalars['DateTime']['output'];
-  /** Returns an excerpt of this story, with a maximum length of `maxLength` characters. */
-  excerpt: Scalars['String']['output'];
-  id: Scalars['ID']['output'];
-  image?: Maybe<G_Image>;
-  likes: Scalars['Int']['output'];
-  title: Scalars['String']['output'];
-  /**
-   * Returns the number of words of this story.
-   *
-   * Note: **for demo purposes to make values more realistic, the values returned do  _not match_ the real number of words!**
-   */
-  wordCount: Scalars['Int']['output'];
-  writer: G_Writer;
-};
-
-
-export type G_StoryExcerptArgs = {
-  maxLength?: Scalars['Int']['input'];
-};
-
-/** Defines all fields that can be used to sort the list of stories */
-export type G_StoryOrderBy =
-  | 'CATEGORY'
-  | 'DATE'
-  | 'LIKES';
 
 export type G_Writer = G_Node & {
   contact?: Maybe<G_Contact>;
@@ -213,7 +213,7 @@ export type G_Static02 = {
   uuid: string
 };
 
-export type G_BaseStoryFragment = {
+export type G_BaseArticleFragment = {
   id: string,
   title: string,
   excerpt: string,
@@ -229,33 +229,20 @@ export type G_BaseStoryFragment = {
   }
 };
 
-export type G_GetStoriesVariables = Exact<{
-  orderBy?: InputMaybe<G_StoryOrderBy>;
+export type G_GetArticlesVariables = Exact<{
+  orderBy?: InputMaybe<G_ArticleOrderBy>;
   page: Scalars['Int']['input'];
 }>;
 
 
-export type G_GetStories = {
-  stories: {
-    results: Array<G_BaseStoryFragment>
+export type G_GetArticles = {
+  articles: {
+    results: Array<G_BaseArticleFragment>
   }
 };
 
-export type G_GetSingleStoryVariables = Exact<{
-  storyId: Scalars['ID']['input'];
-}>;
-
-
-export type G_GetSingleStory = {
-  story?: {
-    id: string,
-    title: string
-  }
-};
-
-export const BaseStoryFragment = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"BaseStoryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Story"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"maxLength"},"value":{"kind":"IntValue","value":"150"}}]},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"category"}},{"kind":"Field","name":{"kind":"Name","value":"likes"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uri"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wordCount"}},{"kind":"Field","name":{"kind":"Name","value":"writer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<G_BaseStoryFragment, unknown>;
+export const BaseArticleFragment = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"BaseArticleFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"maxLength"},"value":{"kind":"IntValue","value":"150"}}]},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"category"}},{"kind":"Field","name":{"kind":"Name","value":"likes"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uri"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wordCount"}},{"kind":"Field","name":{"kind":"Name","value":"writer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<G_BaseArticleFragment, unknown>;
 export const Dynamic01Document = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Dynamic01"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}}]}}]} as unknown as DocumentNode<G_Dynamic01, G_Dynamic01Variables>;
 export const Static01Document = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Static01"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}}]}}]} as unknown as DocumentNode<G_Static01, G_Static01Variables>;
 export const Static02Document = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Static02"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}}]}}]} as unknown as DocumentNode<G_Static02, G_Static02Variables>;
-export const GetStoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetStories"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"StoryOrderBy"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"page"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"stories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"page"},"value":{"kind":"Variable","name":{"kind":"Name","value":"page"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}},{"kind":"Argument","name":{"kind":"Name","value":"pageSize"},"value":{"kind":"IntValue","value":"6"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"BaseStoryFragment"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"BaseStoryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Story"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"maxLength"},"value":{"kind":"IntValue","value":"150"}}]},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"category"}},{"kind":"Field","name":{"kind":"Name","value":"likes"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uri"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wordCount"}},{"kind":"Field","name":{"kind":"Name","value":"writer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<G_GetStories, G_GetStoriesVariables>;
-export const GetSingleStoryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetSingleStory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"storyId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"story"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"storyId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"storyId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<G_GetSingleStory, G_GetSingleStoryVariables>;
+export const GetArticlesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetArticles"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ArticleOrderBy"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"page"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"articles"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"page"},"value":{"kind":"Variable","name":{"kind":"Name","value":"page"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}},{"kind":"Argument","name":{"kind":"Name","value":"pageSize"},"value":{"kind":"IntValue","value":"6"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"BaseArticleFragment"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"BaseArticleFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Article"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"maxLength"},"value":{"kind":"IntValue","value":"150"}}]},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"category"}},{"kind":"Field","name":{"kind":"Name","value":"likes"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uri"}}]}},{"kind":"Field","name":{"kind":"Name","value":"wordCount"}},{"kind":"Field","name":{"kind":"Name","value":"writer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<G_GetArticles, G_GetArticlesVariables>;

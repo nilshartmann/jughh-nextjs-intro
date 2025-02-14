@@ -3,11 +3,11 @@ package nh.springgraphql.graphqlservice.domain;
 import java.util.List;
 import java.util.Optional;
 
-public record StoriesResult(
+public record ArticlesResult(
     int page, int pageSize,
-    StoryOrderBy orderBy,
+    ArticleOrderBy orderBy,
     Optional<Integer> prevPage,
     Optional<Integer> nextPage,
-    List<Story> results
+    List<Article> results
 ) {
 }

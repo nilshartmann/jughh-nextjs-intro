@@ -18,15 +18,15 @@ import java.util.UUID;
 @Controller
 class QueryController {
 
-    private final StoryRepository storyRepository;
+    private final ArticleRepository articleRepository;
 
-    QueryController(StoryRepository storyRepository) {
-        this.storyRepository = storyRepository;
+    QueryController(ArticleRepository articleRepository) {
+        this.articleRepository = articleRepository;
     }
 
     @QueryMapping
-    StoriesResult stories(@Argument Optional<StoryOrderBy> orderBy, @Argument Optional<Integer> page, @Argument Optional<Integer> pageSize) {
-        var actualOrderBy = orderBy.orElse(StoryOrderBy.DATE);
+    ArticlesResult articles(@Argument Optional<ArticleOrderBy> orderBy, @Argument Optional<Integer> page, @Argument Optional<Integer> pageSize) {
+        var actualOrderBy = orderBy.orElse(ArticleOrderBy.DATE);
         var actualPage = page.orElse(1);
         var actualPageSize = pageSize.orElse(4);
 
@@ -35,7 +35,7 @@ class QueryController {
                 .formatted(actualPage));
         }
 
-        var result = this.storyRepository.findAllStories(actualOrderBy, actualPage, actualPageSize);
+        var result = this.articleRepository.findAllArticles(actualOrderBy, actualPage, actualPageSize);
         return result;
     }
 
@@ -54,34 +54,34 @@ class QueryController {
 
     @QueryMapping
     List<Writer> writers() {
-        return storyRepository.findAllWriters();
+        return articleRepository.findAllWriters();
     }
 
 
     @QueryMapping
-    Optional<Story> story(@Argument Optional<NodeId> storyId) {
-        return storyId
+    Optional<Article> article(@Argument Optional<NodeId> articleId) {
+        return articleId
             .map(NodeId::id)
-            .map(this.storyRepository::findStory)
-            .orElseGet(() -> Optional.ofNullable(this.storyRepository.findAllStories(StoryOrderBy.DATE, 1, 1).results().getFirst()))
+            .map(this.articleRepository::findArticle)
+            .orElseGet(() -> Optional.ofNullable(this.articleRepository.findAllArticles(ArticleOrderBy.DATE, 1, 1).results().getFirst()))
             ;
     }
 
     @SchemaMapping
-    String excerpt(Story story, @Argument int maxLength) {
-        return storyRepository.generateExcerpt(story, maxLength);
+    String excerpt(Article article, @Argument int maxLength) {
+        return articleRepository.generateExcerpt(article, maxLength);
     }
 
     @SchemaMapping
-    long wordCount(Story story) {
-        long wordCount = story.body().chars().filter(ch -> ch == 'e').count() * 10;
+    long wordCount(Article article) {
+        long wordCount = article.body().chars().filter(ch -> ch == 'e').count() * 10;
         return wordCount;
     }
 
     @SchemaMapping
-    Image image(Story story) {
+    Image image(Article article) {
         return new Image(
-            "/images/stories/s_%s.webp".formatted(story.id())
+            "/images/articles/s_%s.webp".formatted(article.id())
         );
     }
 

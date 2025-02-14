@@ -2,13 +2,13 @@
 import { twMerge } from "tailwind-merge";
 
 import { LikeIndicator } from "@/components/LoadingIndicator";
-import { BaseStory } from "@/types";
+import { BaseArticle } from "@/types";
 
 type LikesWidgetProps = {
-  story: BaseStory;
+  article: BaseArticle;
 };
 
-export function LikesWidget({ story }: LikesWidgetProps) {
+export function LikesWidget({ article }: LikesWidgetProps) {
   // const [state, action, pending] = useActionState(likeRecipeAction, {
   //   recipeId: recipe.id,
   //   likes: recipe.likes,
@@ -24,7 +24,7 @@ export function LikesWidget({ story }: LikesWidgetProps) {
           "flex space-x-2 rounded border border-slate-200 bg-slate-50 px-2 py-1 text-[15px] text-teal-700 hover:cursor-pointer hover:bg-teal-700 hover:text-white disabled:cursor-default disabled:border-gray-900 disabled:bg-gray-300 disabled:text-gray-900 disabled:hover:text-gray-900",
         )}
       >
-        <span className={"ms-2"}>{story.likes}</span>
+        <span className={"ms-2"}>{article.likes}</span>
         {pending ? (
           <LikeIndicator />
         ) : (

@@ -24,7 +24,7 @@ type Comment implements Node {
     id: ID!
     text: String!
 
-    story: Story!
+    article: Article!
 }
 
 enum Category {
@@ -37,7 +37,7 @@ type Image {
     uri: String!
 }
 
-type Story implements Node {
+type Article implements Node {
     id: ID!
     title: String!
     category: Category!
@@ -45,11 +45,11 @@ type Story implements Node {
     date: DateTime!
     body: String!
     """
-    Returns an excerpt of this story, with a maximum length of `maxLength` characters.
+    Returns an excerpt of this article, with a maximum length of `maxLength` characters.
     """
     excerpt(maxLength: Int! = 20): String!
     """
-    Returns the number of words of this story.
+    Returns the number of words of this article.
 
     Note: **for demo purposes to make values more realistic, the values returned do  _not match_ the real number of words!**
     """
@@ -64,30 +64,30 @@ type Story implements Node {
 }
 
 """
-Defines all fields that can be used to sort the list of stories
+Defines all fields that can be used to sort the list of articles
 """
-enum StoryOrderBy {
+enum ArticleOrderBy {
     DATE, LIKES, CATEGORY
 }
 
-type StoriesResult {
+type ArticlesResult {
     """Number of the requested page.
 
     If the request doesn't specified a page, it's set to the applied default value by the server.
     """
     page: Int!
-    """Size of the requested page (i.e. maximum number of `Story` objects returned)
+    """Size of the requested page (i.e. maximum number of `Article` objects returned)
 
     If the request doesn't specified a page, it's set to the applied default value by the server.
     """
     pageSize: Int!
 
     """
-    The field that is used to sort the resulting stories from the request
+    The field that is used to sort the resulting articles from the request
 
     If the request doesn't specified an `orderBy`, it's set to the applied default value by the server.
     """
-    orderBy: StoryOrderBy!
+    orderBy: ArticleOrderBy!
 
     """
     Number of the next page or empty if there is no next page
@@ -99,43 +99,43 @@ type StoriesResult {
     prevPage: Int
 
     """
-    List of Storys matching the query
+    List of articles matching the query
     """
-    results: [Story!]!
+    results: [Article!]!
 }
 
 type Query {
     # Note: in real GraphQL API you might consider Cursor-based pagination
     # see: https://relay.dev/graphql/connections.htm
     """
-    Returns a list of stories
+    Returns a list of articles
     """
-    stories(
+    articles(
         """Specify `orderBy` when you want a sorted list.
         - If no `orderBy` is given, the list is ordered by date
         """
-        orderBy: StoryOrderBy
+        orderBy: ArticleOrderBy
         """
-        Defines the size of a page, i.e. the maximum number of stories returned by a query.
+        Defines the size of a page, i.e. the maximum number of articles returned by a query.
         - If not specified, a default sensible value on serverside will be set
         """
         pageSize: Int,
         """
         Specifies the page that should be returned. This is a 1-based index, so the first page
-        is requested using `page: 1`. The amount of stories per `page` is defined by the `pageSize`
+        is requested using `page: 1`. The amount of articles per `page` is defined by the `pageSize`
         parameter.
         - If not specified, page defaults to `1`
         """
         page: Int
-    ): StoriesResult!
+    ): ArticlesResult!
 
     """
-    Returns the `Story` with the given `storyId`.
+    Returns the `Article` with the given `articleId`.
 
-    - If no `storyId` is provided, the _latest_ story will be returned
-    - If a `storyId` is provided, but there is no story with that id, `null` is returned
+    - If no `articleId` is provided, the _latest_ article will be returned
+    - If a `articleId` is provided, but there is no article with that id, `null` is returned
     """
-    story(storyId: ID): Story
+    article(articleId: ID): Article
 
     """Return all registered `Writers`"""
     writers: [Writer!]!
@@ -150,7 +150,7 @@ type Query {
 }
 
 input AddCommentInput {
-    storyId: ID!
+    articleId: ID!
     text: String!
 }
 
@@ -165,11 +165,11 @@ type AddCommentError {
 union AddCommentPayload = AddCommentSuccess | AddCommentError
 
 input AddLikeInput {
-    storyId: ID!
+    articleId: ID!
 }
 
 type AddLikeSuccess {
-    story: Story!
+    article: Article!
 }
 
 type AddLikeError {

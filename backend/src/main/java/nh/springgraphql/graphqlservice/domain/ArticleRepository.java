@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * This simulates some store of stories. To make things simple during the workshop everything we need is
+ * This simulates some store of articles. To make things simple during the workshop everything we need is
  * placed in this single class.
  * <p>
  * In real life, that would be a database, remote service, ... <br/>
- * Also it would maybe be splitted into multiple parts: Stories, Comments, ExcerptService, ...
+ * Also it would maybe be splitted into multiple parts: Articles, Comments, ExcerptService, ...
  * </p>
  * <p>
  * This is <b>not threadsafe</b>. While you can access the repository with multiple read requests in parallel,
@@ -18,40 +18,40 @@ import java.util.Optional;
  * </p>
  */
 @Component
-public class StoryRepository {
+public class ArticleRepository {
 
-    private final List<Story> stories;
+    private final List<Article> articles;
 
-    StoryRepository() {
-        this.stories = Stories.generateSampleStories();
+    ArticleRepository() {
+        this.articles = Articles.generateSampleArticles();
     }
 
-    public StoriesResult findAllStories(StoryOrderBy orderBy, int page, int pageSize) {
+    public ArticlesResult findAllArticles(ArticleOrderBy orderBy, int page, int pageSize) {
         var zeroBasedPage = page - 1;
-        var sortedStories = stories.stream()
+        var sortedArticles = articles.stream()
             .sorted(orderBy.comparator)
             .skip((long) zeroBasedPage * pageSize)
             .limit(pageSize)
             .toList();
 
         var prevPage = page > 1 ? page - 1 : null;
-        var nextPage = (zeroBasedPage + 1) * pageSize < stories.size() ? page + 1 : null;
+        var nextPage = (zeroBasedPage + 1) * pageSize < articles.size() ? page + 1 : null;
 
-        return new StoriesResult(
+        return new ArticlesResult(
             page, pageSize,
             orderBy,
             Optional.ofNullable(prevPage),
             Optional.ofNullable(nextPage),
-            sortedStories
+            sortedArticles
         );
     }
 
-    public Optional<Story> findStory(String storyId) {
-        return stories.stream().filter(s -> s.id().equals(storyId)).findAny();
+    public Optional<Article> findArticle(String articleId) {
+        return articles.stream().filter(s -> s.id().equals(articleId)).findAny();
     }
 
-    public Optional<Story> findStoryForComment(String commentId) {
-        for (Story s : stories) {
+    public Optional<Article> findArticleForComment(String commentId) {
+        for (Article s : articles) {
             if (s.comments().stream().anyMatch(c -> c.id().equals(commentId))) {
                 return Optional.of(s);
             }
@@ -62,15 +62,15 @@ public class StoryRepository {
 
 
     //    @Cacheable(cacheNames="excerpt-cache")
-//    @Cacheable(cacheNames="excerpt-cache", key="'story_' + #story.id() + '_' + #maxLength")
-    public String generateExcerpt(Story story, int maxLength) {
+//    @Cacheable(cacheNames="excerpt-cache", key="'article_' + #article.id() + '_' + #maxLength")
+    public String generateExcerpt(Article article, int maxLength) {
 //        // run some heavily complex algorithms or ask AI to generate
 //        // the excerpt...
 //        sleep(2000);
 
         var effectiveMaxLength = maxLength - 1;
 
-        var input = story.body();
+        var input = article.body();
 
         if (input.length() <= effectiveMaxLength) {
             return input.endsWith(".") ? input : input + ".";
@@ -90,38 +90,38 @@ public class StoryRepository {
     }
 
     public Optional<Comment> findComment(String id) {
-        return this.stories.stream()
+        return this.articles.stream()
             .flatMap(s -> s.comments().stream().filter(c -> c.id().equals(id)))
             .findAny();
     }
 
     public Optional<Writer> findWriter(String id) {
-        return this.stories.stream()
-            .map(Story::writer)
+        return this.articles.stream()
+            .map(Article::writer)
             .filter(w -> w.id().equals(id))
             .findAny();
     }
 
     public List<Writer> findAllWriters() {
-        return this.stories.stream()
-            .map(Story::writer)
+        return this.articles.stream()
+            .map(Article::writer)
             .distinct()
             .sorted()
             .toList();
     }
 
 
-    public List<Comment> findCommentsForStory(String storyId) {
-        var story = findStory(storyId).orElseThrow(
-            () -> new ResourceNotFoundException("Story '%s' not found".formatted(storyId))
+    public List<Comment> findCommentsForArticle(String articleId) {
+        var article = findArticle(articleId).orElseThrow(
+            () -> new ResourceNotFoundException("Article '%s' not found".formatted(articleId))
         );
 
-        return story.comments().stream().toList();
+        return article.comments().stream().toList();
     }
 
-    public Comment addComment(String storyId, String text) {
-        var story = findStory(storyId).orElseThrow(
-            () -> new ResourceNotFoundException("Story '%s' not found".formatted(storyId))
+    public Comment addComment(String articleId, String text) {
+        var article = findArticle(articleId).orElseThrow(
+            () -> new ResourceNotFoundException("Article '%s' not found".formatted(articleId))
         );
 
         if (text.length() < 5) {
@@ -133,7 +133,7 @@ public class StoryRepository {
             text
         );
 
-        story.comments().add(newComment);
+        article.comments().add(newComment);
 
         return newComment;
     }
@@ -141,8 +141,8 @@ public class StoryRepository {
     private String newCommentId() {
         //  😈 😈 😈 😈
         return String.valueOf(
-            this.stories.stream()
-                .map(Story::comments)
+            this.articles.stream()
+                .map(Article::comments)
                 .mapToInt(List::size)
                 .sum()
         );
@@ -155,21 +155,15 @@ public class StoryRepository {
 //    }
 
     public static void main(String[] args) {
-        StoryRepository repo = new StoryRepository();
-        var stories = repo.stories;
+        ArticleRepository repo = new ArticleRepository();
+        var articles = repo.articles;
 
-        // Print each story and its comments
-        for (Story story : stories) {
-            System.out.println("Story: " + story);
-            System.out.println("Comments: " + repo.findCommentsForStory(story.id()));
+        // Print each article and its comments
+        for (Article article : articles) {
+            System.out.println("Article: " + article);
+            System.out.println("Comments: " + repo.findCommentsForArticle(article.id()));
             System.out.println();
         }
-
-        // Example: Add a comment to a story in a thread-safe manner
-//        repo.addComment("1", new Comment("13", "Looking forward to more updates!", 4));
-
-        // Print updated comments for Story 1
-//        System.out.println("Updated Comments for Story 1: " + repo.getComments("1"));
     }
 
 

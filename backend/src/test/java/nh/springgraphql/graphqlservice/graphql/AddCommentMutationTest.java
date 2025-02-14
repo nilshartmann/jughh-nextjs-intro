@@ -1,7 +1,7 @@
 package nh.springgraphql.graphqlservice.graphql;
 
 import nh.springgraphql.graphqlservice.config.graphql.GraphQlConfig;
-import nh.springgraphql.graphqlservice.domain.StoryRepository;
+import nh.springgraphql.graphqlservice.domain.ArticleRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.graphql.GraphQlTest;
@@ -12,14 +12,14 @@ import org.springframework.test.annotation.DirtiesContext;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @GraphQlTest(MutationController.class)
-@Import({StoryRepository.class, GraphQlConfig.class})
+@Import({ArticleRepository.class, GraphQlConfig.class})
 public class AddCommentMutationTest {
 
     @Autowired
     GraphQlTester graphQlTester;
 
     @Autowired
-    StoryRepository storyRepository;
+    ArticleRepository articleRepository;
 
     @Test
     @DirtiesContext
@@ -29,7 +29,7 @@ public class AddCommentMutationTest {
             // language=GraphQL
             """
             mutation { newComment: addComment(
-                    input: { storyId: "1", text: "hello world" }
+                    input: { articleId: "1", text: "hello world" }
                 ) {
                 ...on AddCommentSuccess{ newComment {
                 id text } }
@@ -43,19 +43,19 @@ public class AddCommentMutationTest {
                 tester.path("text").entity(String.class).isEqualTo("hello world");
             });
 
-        var comments = storyRepository.findStory("1").orElseThrow().comments();
+        var comments = articleRepository.findArticle("1").orElseThrow().comments();
         assertThat(comments).hasSize(4);
         assertThat(comments.get(3).text()).isEqualTo("hello world");
     }
 
     @Test
-    void invalid_story_id_returns_error_payload() {
+    void invalid_article_id_returns_error_payload() {
 
         graphQlTester.document(
                 // language=GraphQL
                 """
                 mutation { newComment: addComment(
-                        input: { storyId: "666", text: "hello world" }
+                        input: { articleId: "666", text: "hello world" }
                     ) {
                     ...on AddCommentError{ msg }
                     }

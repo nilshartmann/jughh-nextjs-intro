@@ -1,4 +1,4 @@
-export type BaseStory = {
+export type BaseArticle = {
   id: string;
   title: string;
   excerpt: string;

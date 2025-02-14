@@ -4,7 +4,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
 
-public class Story {
+public class Article {
     private final String id;
     private final OffsetDateTime date;
     private final String title;
@@ -14,7 +14,7 @@ public class Story {
     private final Writer writer;
     private int likes;
 
-    public Story(String id, OffsetDateTime date, String title, String body, List<Comment> comments, Category category, Writer writer, int likes) {
+    public Article(String id, OffsetDateTime date, String title, String body, List<Comment> comments, Category category, Writer writer, int likes) {
         this.id = id;
         this.date = date;
         this.title = title;
@@ -63,8 +63,8 @@ public class Story {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Story story)) return false;
-        return Objects.equals(id, story.id);
+        if (!(o instanceof Article article)) return false;
+        return Objects.equals(id, article.id);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class Story {
 
     @Override
     public String toString() {
-        return "Story{" +
+        return "Article{" +
                "id='" + id + '\'' +
                ", date=" + date +
                ", title='" + title + '\'' +

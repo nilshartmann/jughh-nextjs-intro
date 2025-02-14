@@ -1,7 +1,7 @@
 package nh.springgraphql.graphqlservice.graphql;
 
 import nh.springgraphql.graphqlservice.config.graphql.GraphQlConfig;
-import nh.springgraphql.graphqlservice.domain.StoryRepository;
+import nh.springgraphql.graphqlservice.domain.ArticleRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.graphql.GraphQlTest;
@@ -9,65 +9,65 @@ import org.springframework.context.annotation.Import;
 import org.springframework.graphql.test.tester.GraphQlTester;
 
 @GraphQlTest(controllers = QueryController.class)
-@Import({StoryRepository.class, GraphQlConfig.class})
+@Import({ArticleRepository.class, GraphQlConfig.class})
 public class QueryControllerTest {
     @Autowired
     GraphQlTester tester;
 
     @Test
-    void returns_existing_story_by_id_with_default_excerpt() {
+    void returns_existing_article_by_id_with_default_excerpt() {
         tester.document(
                 // language=GraphQL
                 """
-                query { story(storyId: "2") { id title excerpt } }
+                query { article(articleId: "2") { id title excerpt } }
                 """)
             .execute()
-            .path("story", tester -> {
+            .path("article", tester -> {
                 tester.path("id").entity(String.class).isEqualTo("2");
                 tester.path("title").entity(String.class).isEqualTo("Climate Change and Renewable Energy");
-                tester.path("excerpt").entity(String.class).isEqualTo("As global temperatur");
+                tester.path("excerpt").entity(String.class).isEqualTo("As global.");
             });
     }
 
     @Test
-    void returns_existing_story_by_id_with_specified_excerpt() {
+    void returns_existing_article_by_id_with_specified_excerpt() {
         tester.document(
                 // language=GraphQL
                 """
-                query { story(storyId: "2") { id title excerpt(maxLength: 5) } }
+                query { article(articleId: "2") { id title excerpt(maxLength: 5) } }
                 """)
             .execute()
-            .path("story", tester -> {
+            .path("article", tester -> {
                 tester.path("id").entity(String.class).isEqualTo("2");
                 tester.path("title").entity(String.class).isEqualTo("Climate Change and Renewable Energy");
-                tester.path("excerpt").entity(String.class).isEqualTo("As gl");
+                tester.path("excerpt").entity(String.class).isEqualTo("As.");
             });
     }
 
     @Test
-    void returns_null_when_story_not_exists() {
+    void returns_null_when_article_not_exists() {
         tester.document(
                 // language=GraphQL
                 """
-                query { story(storyId: "666") { id title } }
+                query { article(articleId: "666") { id title } }
                 """)
             .execute()
-            .path("story").valueIsNull();
+            .path("article").valueIsNull();
     }
 
 
     @Test
-    void returns_stories() {
+    void returns_articles() {
         tester.document(
             // language=GraphQL
             """
-            query { stories { id title } }
+            query { articles(pageSize: 12) { results { id title } } }
             """)
             .execute()
-            .path("stories[*]").entityList(Object.class).hasSize(12)
-            .path("stories[0]", tester -> {
-                tester.path("id").entity(String.class).isEqualTo("1");
-                tester.path("title").entity(String.class).isEqualTo("AI Revolutionizing Healthcare");
+            .path("articles.results[*]").entityList(Object.class).hasSize(12)
+            .path("articles.results[0]", tester -> {
+                tester.path("id").entity(String.class).isEqualTo("16");
+                tester.path("title").entity(String.class).isEqualTo("Coral Reef Restoration: A Race Against Time");
             });
     }
 

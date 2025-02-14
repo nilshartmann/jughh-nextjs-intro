@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/Button";
 import Footer from "@/components/layout/Footer";
 
-export default function Home() {
+export default function LandingPage() {
   return (
     <main
       className={"min-w-screen flex flex-grow flex-col bg-cover"}
@@ -50,7 +50,7 @@ export default function Home() {
           </div>
           <div className="flex justify-center">
             <Button size={"lg"}>
-              <Link href={"/stories"} prefetch={false}>
+              <Link href={"/articles"} prefetch={false}>
                 Let me in - I want to read more! 😻
               </Link>
             </Button>

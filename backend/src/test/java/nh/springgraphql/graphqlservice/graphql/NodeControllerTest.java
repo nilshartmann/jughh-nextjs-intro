@@ -2,7 +2,7 @@ package nh.springgraphql.graphqlservice.graphql;
 
 import nh.springgraphql.graphqlservice.config.graphql.GraphQlConfig;
 import nh.springgraphql.graphqlservice.domain.PublisherServiceClient;
-import nh.springgraphql.graphqlservice.domain.StoryRepository;
+import nh.springgraphql.graphqlservice.domain.ArticleRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.graphql.GraphQlTest;
@@ -11,7 +11,7 @@ import org.springframework.graphql.test.tester.GraphQlTester;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 @GraphQlTest(NodeController.class)
-@Import({StoryRepository.class, GraphQlConfig.class})
+@Import({ArticleRepository.class, GraphQlConfig.class})
 public class NodeControllerTest {
 
     @MockitoBean
@@ -22,11 +22,11 @@ public class NodeControllerTest {
 
 
     @Test
-    void node_returns_story_by_id() {
+    void node_returns_article_by_id() {
         tester.document(
             // language=GraphQL
             """
-            { node (id: "S:1") {... on Story { title }}}
+            { node (id: "A_1") {... on Article { title }}}
 """
         )
             .execute()

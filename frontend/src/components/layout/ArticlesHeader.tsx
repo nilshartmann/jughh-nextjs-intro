@@ -1,15 +1,15 @@
-import "./StoriesHeader.css";
+import "./ArticlesHeader.css";
 
 import Link from "next/link";
 
 import Breaking from "@/components/Breaking";
 
-export default function StoriesHeader() {
+export default function ArticlesHeader() {
   return (
     <header className={"global-header flex h-36 items-center"}>
       <div className={"mx-auto w-full max-w-screen-lg"}>
         <div className={"flex items-center justify-between font-bold"}>
-          <Link href={"/stories"} prefetch={false}>
+          <Link href={"/articles"} prefetch={false}>
             <div
               className={
                 "group flex items-start space-x-4 rounded-lg bg-teal-100/30 p-4 font-space hover:bg-teal-600/40"
