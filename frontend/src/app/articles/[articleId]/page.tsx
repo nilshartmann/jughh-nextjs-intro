@@ -1,37 +1,15 @@
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 import { ArticlePageBanner } from "@/components/articlepage/ArticlePageBanner";
-import CommentList, { Comment } from "@/components/articlepage/CommentList";
+import CommentList from "@/components/articlepage/CommentList";
 import { H2 } from "@/components/Heading";
+import LoadingIndicator from "@/components/LoadingIndicator";
 import { Sidebar } from "@/components/Sidebar";
-import { fetchArticle } from "@/queries/queries";
 
 type ArticlePageProps = {
   params: Promise<Record<string, string>>;
 };
-
-const comments: Comment[] = [
-  {
-    id: "1",
-    comment: "Lorem ipsum diliri",
-    commenter: "Paul",
-  },
-  {
-    id: "2",
-    comment: "Green gray blue fasdfasdf",
-    commenter: "Toni",
-  },
-  {
-    id: "3",
-    comment: "Lorem ipsum diliri",
-    commenter: "Sarah",
-  },
-  {
-    id: "4",
-    comment: "Lorem ipsum diliri",
-    commenter: "Maja",
-  },
-];
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { articleId } = await params;
@@ -62,7 +40,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             <div className={"flex justify-center"}>
               <H2>What others think</H2>
             </div>
-            <CommentList articleId={article.id} />
+            <Suspense
+              fallback={
+                <LoadingIndicator>Loading comments...</LoadingIndicator>
+              }
+            >
+              <CommentList articleId={article.id} />
+            </Suspense>
             {/*<Suspense*/}
             {/*  fallback={*/}
             {/*    <LoadingIndicator>Loading feedback...</LoadingIndicator>*/}

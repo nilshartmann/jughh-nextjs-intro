@@ -1,6 +1,9 @@
 /* Spinner CSS taken from: http://tobiasahlin.com/spinkit/ */
 .Spinner {
-  --color-text: #f89223;
+  /* teal-800 */
+  --color-text: #115e59;
+  /* teal-50  */
+  --color-light: #f0fdfa;
   margin: auto 0;
   width: 100%;
   font-size: 3rem;
@@ -54,8 +57,8 @@
 
 .Spinner.secondary > .bounce.fill {
   font-size: 1rem;
-  /* teal-50 */
-  background-color: #f0fdfa;
+
+  background-color: var(--color-light);
 }
 
 .Spinner .bounce1 {

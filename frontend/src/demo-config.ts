@@ -4,10 +4,15 @@
  *
  */
 export const demoConfig: Record<string, number> = {
-  /** query on /articles
-   *
-   * - must match the name of the GraphQL Operation!
-   **/
-  GetArticles: 0,
+  // Article-List on `/articles`
+  GetArticleList: 0,
+
+  // Single Article on `/articles/[articleId]`
+  GetArticle: 0,
+
+  // Submitting the Newsletter form
   SubscribeNewsletter: 150,
+
+  // Reading comments on `/articles/[articleId]`
+  GetCommentList: 0,
 };

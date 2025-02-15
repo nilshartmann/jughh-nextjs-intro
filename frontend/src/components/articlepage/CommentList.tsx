@@ -23,7 +23,8 @@ export default async function CommentList({ articleId }: CommentListProps) {
               {/*  <RatingStars rating={f.rating} />*/}
               {/*</div>*/}
               <div className={"leading-7"}>
-                <span className={"font-bold"}>{f.writer}</span> says: {f.text}
+                <span className={"font-bold"}>{f.writer}</span> says:{" "}
+                <span className={""}>{f.text}</span>
               </div>
             </span>
           </div>
