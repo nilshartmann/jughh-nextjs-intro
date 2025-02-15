@@ -1,11 +1,14 @@
+import { revalidatePath } from "next/cache";
+
 import {
+  AddLikeDocument,
   G_ArticleOrderBy,
   GetArticleDocument,
   GetArticleListDocument,
   GetCommentListDocument,
   GetRelatedArticlesDocument,
 } from "@/_generated-graphql-types";
-import { query } from "@/graphql-client";
+import { getClient, query } from "@/graphql-client";
 
 export async function fetchArticleList(
   page: string | number | undefined | null = 1,
@@ -53,6 +56,25 @@ export async function fetchRelatedArticles(articleId: string) {
   });
 
   return data.article?.relatedArticles || [];
+}
+
+export async function mutateArticleLikes(articleId: string) {
+  const apolloClient = getClient();
+  const { data } = await apolloClient.mutate({
+    mutation: AddLikeDocument,
+    variables: {
+      articleId,
+    },
+  });
+
+  if (data && "likedArticle" in data.addLike) {
+    revalidatePath("/stories");
+    revalidatePath(`/stories/$articleId}`);
+    return data.addLike.likedArticle.likes;
+  }
+
+  // error case
+  return null;
 }
 
 function getValidPage(p: string | number | undefined | null): number {

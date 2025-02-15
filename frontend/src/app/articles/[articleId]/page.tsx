@@ -33,7 +33,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               return <p key={i}>{p}</p>;
             })}
           </div>{" "}
-          <div className={"border-lg border p-4"}>
+          <div className={"rounded-lg border border-slate-200 bg-stone-50 p-4"}>
             Text is AI-generated and for demo purposes only. It is{" "}
             <span className={"font-bold"}>no real content!</span>
           </div>
@@ -41,7 +41,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         <div className={"w-[40%]"}>
           <Sidebar>
             <SidebarBox title={"Related Articles"}>
-              <RelatedArticles articlesPromise={relatedArticles} />
+              <Suspense fallback={<LoadingIndicator />}>
+                <RelatedArticles articlesPromise={relatedArticles} />
+              </Suspense>
             </SidebarBox>
 
             <SidebarBox title={"What others think"}>

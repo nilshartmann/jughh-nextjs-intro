@@ -17,5 +17,8 @@ export const demoConfig: Record<string, number> = {
   GetCommentList: 0,
 
   // Reading related articles on `/articles/[articleId]`,
-  GetRelatedArticles: 0,
+  GetRelatedArticles: 2400,
+
+  // Delay the response in LikesWidget
+  AddLike: 2400,
 };

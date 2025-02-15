@@ -2,6 +2,7 @@
 import crypto from "crypto";
 
 import { demoConfig } from "@/demo-config";
+import { mutateArticleLikes } from "@/queries/queries";
 
 type NewsletterFormState = {
   email: string;
@@ -41,5 +42,26 @@ export async function subscribeToNewsletter(
     requestId: uniqueId(),
     email: "",
     status: "Subscribed!",
+  };
+}
+
+type AddLikeState = {
+  articleId: string;
+  likes: number;
+};
+
+export async function saveLike(state: AddLikeState): Promise<AddLikeState> {
+  const articleId = state.articleId;
+
+  console.log("SAVE LIKE", articleId);
+  const newLikes = await mutateArticleLikes(articleId);
+  if (newLikes === null) {
+    // error
+    return state;
+  }
+
+  return {
+    ...state,
+    likes: newLikes,
   };
 }
