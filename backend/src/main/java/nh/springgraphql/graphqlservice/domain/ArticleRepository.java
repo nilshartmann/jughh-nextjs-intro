@@ -2,6 +2,7 @@ package nh.springgraphql.graphqlservice.domain;
 
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -148,17 +149,41 @@ public class ArticleRepository {
 //        return offsetDateTime;
 //    }
 
+    public List<Article> getRelatedArticles(Article article) {
+        List<Article> result = new ArrayList<>();
+
+        if (articles.isEmpty()) return result; // Edge case: No articles
+
+        int index = -1;
+        for (int i = 0; i < articles.size(); i++) {
+            if (articles.get(i).id().equals(article.id())) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index == -1) return result; // Edge case: Selected article not found
+
+        int size = articles.size();
+        for (int i = 1; i <= 3; i++) {
+            result.add(articles.get((index + i) % size));
+            if (result.size() >= size) break; // Stop if we've collected all articles
+        }
+
+        return result;
+    }
+
     public static void main(String[] args) {
         ArticleRepository repo = new ArticleRepository();
-        var articles = repo.articles;
+        var article = repo.articles.get(repo.articles.size()-4);
+        repo.getRelatedArticles(article).forEach(
+            a -> System.out.println(a.id())
+        );
 
-        // Print each article and its comments
-        for (Article article : articles) {
-            System.out.println("Article: " + article);
-            System.out.println("Comments: " + repo.findCommentsForArticle(article.id()));
-            System.out.println();
-        }
+
+
     }
+
 
 
 }

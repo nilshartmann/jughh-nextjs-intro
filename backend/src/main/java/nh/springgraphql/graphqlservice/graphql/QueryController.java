@@ -81,8 +81,14 @@ class QueryController {
     @SchemaMapping
     Image image(Article article) {
         return new Image(
-            "/images/articles/s_%s.webp".formatted(article.id())
+            "/images/articles/s_%s.webp".formatted(article.id()),
+            "Alt text for %s".formatted(article.title())
         );
+    }
+
+    @SchemaMapping
+    List<Article> relatedArticles(Article article) {
+        return articleRepository.getRelatedArticles(article);
     }
 
     @GraphQlExceptionHandler

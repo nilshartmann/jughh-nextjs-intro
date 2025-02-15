@@ -86,9 +86,32 @@ type PageButtonProps = {
 export function PageButton({ state: { state, label } }: PageButtonProps) {
   const buttonClassName = twMerge(
     "inline-flex h-12 w-12 items-center justify-center rounded px-4 py-2 font-barlow text-white underline-offset-4 transition-all duration-500 ease-in-out",
-    state === "selectable" && "bg-teal-600 hover:bg-teal-700 hover:underline",
+    state === "selectable" &&
+      "cursor-pointer bg-teal-600 hover:bg-teal-700 hover:underline",
     state === "active" && "bg-teal-900 underline hover:bg-teal-900",
     state === "disabled" && "bg-stone-300",
   );
   return <span className={buttonClassName}>{label}</span>;
+}
+
+type ArrowButtonProps = {
+  disabled?: boolean;
+  direction: "left" | "right";
+};
+export function ArrowButton({ direction, disabled }: ArrowButtonProps) {
+  const buttonClassName = twMerge(
+    "inline-flex items-center justify-center rounded-full px-2 py-2 text-white transition-all duration-500 ease-in-out",
+    disabled
+      ? "cursor-default bg-stone-300 hover:bg-stone-300"
+      : "cursor-pointer bg-teal-600 hover:bg-teal-700",
+  );
+  return (
+    <span className={buttonClassName}>
+      {direction === "left" ? (
+        <i className="fa-solid fa-arrow-left"></i>
+      ) : (
+        <i className="fa-solid fa-arrow-right"></i>
+      )}
+    </span>
+  );
 }

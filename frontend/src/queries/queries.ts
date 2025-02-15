@@ -3,6 +3,7 @@ import {
   GetArticleDocument,
   GetArticleListDocument,
   GetCommentListDocument,
+  GetRelatedArticlesDocument,
 } from "@/_generated-graphql-types";
 import { query } from "@/graphql-client";
 
@@ -41,6 +42,17 @@ export async function fetchComments(articleId: string) {
   });
 
   return data.article?.comments || [];
+}
+
+export async function fetchRelatedArticles(articleId: string) {
+  const { data } = await query({
+    query: GetRelatedArticlesDocument,
+    variables: {
+      articleId,
+    },
+  });
+
+  return data.article?.relatedArticles || [];
 }
 
 function getValidPage(p: string | number | undefined | null): number {

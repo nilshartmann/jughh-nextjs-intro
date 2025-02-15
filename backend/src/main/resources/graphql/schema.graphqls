@@ -36,6 +36,7 @@ enum Category {
 
 type Image {
     uri: String!
+    altText: String!
 }
 
 type Article implements Node {
@@ -59,8 +60,18 @@ type Article implements Node {
 
     image: Image
 
-    # Note: in real GraphQL API comments would be pageable
+    # Note: in a real GraphQL API comments would be pageable
     comments: [Comment!]!
+
+    """
+    Returns a list of related articles
+
+    * Note: the backend just picks three (random) articles, that might not be
+      related at all. In real life there would be a better algorithm or even
+      a human selection of related articles.
+    """
+    # Note: in a real GraphQL API this would be pageable
+    relatedArticles: [Article!]!
 
 }
 

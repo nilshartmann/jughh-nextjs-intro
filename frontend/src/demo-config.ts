@@ -15,4 +15,7 @@ export const demoConfig: Record<string, number> = {
 
   // Reading comments on `/articles/[articleId]`
   GetCommentList: 0,
+
+  // Reading related articles on `/articles/[articleId]`,
+  GetRelatedArticles: 0,
 };

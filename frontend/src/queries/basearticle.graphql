@@ -5,7 +5,7 @@ fragment BaseArticleFragment on Article {
     date
     category
     likes
-    image { uri }
+    image { uri altText }
     wordCount
     writer {
         name

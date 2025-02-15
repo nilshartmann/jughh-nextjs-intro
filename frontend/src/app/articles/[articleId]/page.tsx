@@ -3,9 +3,11 @@ import { Suspense } from "react";
 
 import { ArticlePageBanner } from "@/components/articlepage/ArticlePageBanner";
 import CommentList from "@/components/articlepage/CommentList";
-import { H2 } from "@/components/Heading";
+import RelatedArticles from "@/components/articlepage/RelatedArticles";
 import LoadingIndicator from "@/components/LoadingIndicator";
 import { Sidebar } from "@/components/Sidebar";
+import { SidebarBox } from "@/components/SidebarBox";
+import { fetchArticle, fetchRelatedArticles } from "@/queries/queries";
 
 type ArticlePageProps = {
   params: Promise<Record<string, string>>;
@@ -14,6 +16,7 @@ type ArticlePageProps = {
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { articleId } = await params;
 
+  const relatedArticles = fetchRelatedArticles(articleId);
   const article = await fetchArticle(articleId);
 
   if (!article) {
@@ -37,24 +40,19 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         </div>
         <div className={"w-[40%]"}>
           <Sidebar>
-            <div className={"flex justify-center"}>
-              <H2>What others think</H2>
-            </div>
-            <Suspense
-              fallback={
-                <LoadingIndicator>Loading comments...</LoadingIndicator>
-              }
-            >
-              <CommentList articleId={article.id} />
-            </Suspense>
-            {/*<Suspense*/}
-            {/*  fallback={*/}
-            {/*    <LoadingIndicator>Loading feedback...</LoadingIndicator>*/}
-            {/*  }*/}
-            {/*>*/}
-            {/*  <FeedbackListLoader recipeId={recipe.id} />*/}
-            {/*</Suspense>*/}
-            {/*<AddFeedbackForm recipeId={recipe.id} />*/}
+            <SidebarBox title={"Related Articles"}>
+              <RelatedArticles articlesPromise={relatedArticles} />
+            </SidebarBox>
+
+            <SidebarBox title={"What others think"}>
+              <Suspense
+                fallback={
+                  <LoadingIndicator>Loading comments...</LoadingIndicator>
+                }
+              >
+                <CommentList articleId={article.id} />
+              </Suspense>
+            </SidebarBox>
           </Sidebar>
         </div>
       </div>

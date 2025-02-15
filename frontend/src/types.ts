@@ -6,7 +6,7 @@ export type BaseArticle = {
   category: string;
   likes: number;
   wordCount: number;
-  image?: { uri: string };
+  image?: { uri: string; altText: string };
   writer: { name: string };
 };
 

@@ -5,13 +5,5 @@ type SidebarProps = {
 };
 
 export function Sidebar({ children }: SidebarProps) {
-  return (
-    <div
-      className={
-        "border-1 bg-goldgray w-full space-y-8 rounded-2xl bg-slate-50 px-4 py-8 md:mt-0"
-      }
-    >
-      {children}
-    </div>
-  );
+  return <div className={"flex w-full flex-col space-y-8"}>{children}</div>;
 }
