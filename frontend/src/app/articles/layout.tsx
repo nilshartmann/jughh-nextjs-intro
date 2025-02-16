@@ -1,18 +1,9 @@
-import ArticlesHeader from "@/components/layout/ArticlesHeader";
-import Footer from "@/components/layout/Footer";
+import ArticlesLayout from "@/components/layout/ArticlesLayout";
 
-export default function ArticlesLayout({
+export default function ArticlesRouteLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <main className={"ArticlesLayout flex flex-grow flex-col justify-between"}>
-      <div className={"space-y-4"}>
-        <ArticlesHeader />
-        {children}
-      </div>
-      <Footer />
-    </main>
-  );
+  return <ArticlesLayout>{children}</ArticlesLayout>;
 }
