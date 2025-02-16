@@ -1,7 +1,6 @@
 package nh.springgraphql.graphqlservice.graphql;
 
 import nh.springgraphql.graphqlservice.domain.ArticleRepository;
-import nh.springgraphql.graphqlservice.domain.PublisherServiceClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -15,11 +14,9 @@ public class NodeController {
     private static final Logger log = LoggerFactory.getLogger( NodeController.class );
 
     private final ArticleRepository articleRepository;
-    private final PublisherServiceClient publisherServiceClient;
 
-    public NodeController(ArticleRepository articleRepository, PublisherServiceClient publisherServiceClient) {
+    public NodeController(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
-        this.publisherServiceClient = publisherServiceClient;
     }
 
     @SchemaMapping(typeName = "Node")
