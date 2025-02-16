@@ -7,6 +7,7 @@ import {
   GetRelatedArticlesDocument,
 } from "@/_generated-graphql-types";
 import { getClient, query } from "@/graphql-client";
+import { Article } from "@/types";
 
 export async function fetchArticleList(
   page: string | number | undefined | null = 1,
@@ -23,7 +24,9 @@ export async function fetchArticleList(
   return data;
 }
 
-export async function fetchArticle(articleId: string) {
+export async function fetchArticle(
+  articleId: string,
+): Promise<Article | undefined> {
   const { data } = await query({
     query: GetArticleDocument,
     variables: {
