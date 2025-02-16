@@ -1,6 +1,6 @@
 import { OrderButton } from "@/components/articlelistpage/OrderButton";
 import ButtonBar from "@/components/ButtonBar";
-import { NavButtonBar } from "@/NavButtonBar";
+import { NavButtonBar } from "@/components/NavButtonBar";
 
 export default function ArticleListNavBar() {
   return (
