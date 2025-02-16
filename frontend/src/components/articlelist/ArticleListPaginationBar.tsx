@@ -27,6 +27,7 @@ export default async function ArticleListPaginationBar({
             <PageButton state={btn} />
           ) : (
             <Link
+              prefetch={false}
               href={buildUrl("/articles", { ...searchParams, page: btn.page })}
             >
               <PageButton state={btn} />

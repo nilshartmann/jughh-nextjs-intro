@@ -38,7 +38,7 @@ export default function ArticleCard({ article }: ArticleCardProps) {
           </div>
           <H1 className={"font-opensans font-bold text-teal-700"}>
             <Link
-              prefetch={true}
+              prefetch={false}
               href={`/articles/${article.id}`}
               className={
                 "hover:text-teal-800 hover:underline hover:decoration-4"
