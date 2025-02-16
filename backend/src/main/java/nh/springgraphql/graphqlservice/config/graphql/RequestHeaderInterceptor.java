@@ -18,14 +18,22 @@ class RequestHeaderInterceptor implements WebGraphQlInterceptor {
 
     @Override
     public Mono<WebGraphQlResponse> intercept(WebGraphQlRequest request, Chain chain) {
-        var slowdown = Optional.ofNullable(
-                request.getHeaders().getFirst("slowdown")
-            )
-            .map(RequestHeaderInterceptor::safeParse);
+        log.debug("Executing GraphQL Operation '{}' with variables: {}",
+            request.getOperationName(),
+            request.getVariables()
+        );
+        Optional
+            .ofNullable(request.getHeaders().getFirst("slowdown"))
+            .map(RequestHeaderInterceptor::safeParse)
+            .ifPresent(l -> sleepFor(request.getOperationName(), l));
 
-        sleepFor(request.getOperationName(), slowdown);
-
-        return chain.next(request);
+        try {
+            return chain.next(request);
+        } finally {
+            log.debug("Finished GraphQL Operation '{}'",
+                request.getOperationName()
+            );
+        }
     }
 
     private static long safeParse(String o) {
