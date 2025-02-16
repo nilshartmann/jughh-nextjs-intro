@@ -1,5 +1,6 @@
 query GetRelatedArticles($articleId: ID!) {
     article(articleId: $articleId) {
+        id
         relatedArticles {
             ...BaseArticleFragment
         }
