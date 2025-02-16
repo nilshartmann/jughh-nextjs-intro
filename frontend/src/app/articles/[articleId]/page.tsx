@@ -12,9 +12,30 @@ import { fetchArticle, fetchRelatedArticles } from "@/queries/queries";
 type ArticlePageProps = {
   params: Promise<Record<string, string>>;
 };
+// Makes this route to a static route with pre-rendered
+//   pages during build time
+// export async function generateStaticParams() {
+//   return [
+//     {
+//       articleId: "A_1",
+//     },
+//   ];
+// }
+
+/**
+ * Makes this route a static route, so that they can be cached
+ *
+ * Note that a static route will only be delivered complete "at all"
+ * to the client. Means, Suspense Boundaries does not have an effect
+ * actually
+ *
+ * - Dynmic routes on the other hand are not cached at all.
+ */
+// export const dynamic = "error";
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { articleId } = await params;
+  console.log("Rendering Article ", articleId);
 
   const relatedArticles = fetchRelatedArticles(articleId);
   const article = await fetchArticle(articleId);

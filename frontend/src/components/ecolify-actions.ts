@@ -2,7 +2,7 @@
 import crypto from "crypto";
 import { revalidatePath } from "next/cache";
 
-import { demoConfig } from "@/demo-config";
+import { delayConfig } from "@/demo-config";
 import { mutateArticleLikes } from "@/queries/queries";
 
 type NewsletterFormState = {
@@ -24,7 +24,7 @@ export async function subscribeToNewsletter(
   //  This example doesn't care about error handling etc.
 
   await new Promise((res) =>
-    setTimeout(() => res("Subscribed"), demoConfig.SubscribeNewsletter),
+    setTimeout(() => res("Subscribed"), delayConfig.SubscribeNewsletter),
   );
 
   const email = formData.get("email") as string;

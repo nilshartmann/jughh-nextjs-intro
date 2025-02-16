@@ -12,6 +12,8 @@ export default async function ArticleListPage({
 }: ArticleListPageProps) {
   const { orderBy, page } = await searchParams;
 
+  console.log("Rendering ArticleListPage with searchParams", orderBy, page);
+
   const data = await fetchArticleList(page, orderBy);
 
   return (

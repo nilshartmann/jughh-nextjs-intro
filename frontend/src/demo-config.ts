@@ -3,7 +3,7 @@
  * to simulate slow response times from the backend
  *
  */
-export const demoConfig: Record<string, number> = {
+export const delayConfig: Record<string, number> = {
   // Article-List on `/articles`
   GetArticleList: 0,
 
@@ -22,3 +22,7 @@ export const demoConfig: Record<string, number> = {
   // Delay the response in LikesWidget
   AddLike: 500,
 };
+
+// Setting this to 'force-cache' will enable Next.js
+// DATA cache, so graphql requests are not run twice
+export const graphQlFetchCache: "force-cache" | null = "force-cache";
