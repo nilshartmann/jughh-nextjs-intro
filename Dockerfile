@@ -7,6 +7,7 @@ WORKDIR /build
 # Copy the source code into the image for building
 COPY backend /build
 
+COPY .git /build/.git
 COPY .mvn /build/.mvn
 
 COPY mvnw /build
