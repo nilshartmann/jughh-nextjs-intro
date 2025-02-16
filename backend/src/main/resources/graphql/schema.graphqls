@@ -121,6 +121,17 @@ type ArticlesResult {
     results: [Article!]!
 }
 
+"""
+Provides informations about the backend process.
+
+- Note: this information would not be available in a real API. Here for testing only
+"""
+type BackendInfo {
+    commitId: String!
+    commitDate: String!
+    commitMsg: String
+}
+
 type Query {
     # Note: in real GraphQL API you might consider Cursor-based pagination
     # see: https://relay.dev/graphql/connections.htm
@@ -164,6 +175,11 @@ type Query {
 
     """Returns a unique string for each request (for testing)"""
     uuid: String!
+
+    """Returns the version (git commit) of the backend process
+
+    - for testing, would not be part of a real application"""
+    backendInfo: BackendInfo!
 }
 
 input AddCommentInput {
