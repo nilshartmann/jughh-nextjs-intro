@@ -1,5 +1,6 @@
 "use server";
 import crypto from "crypto";
+import { revalidatePath } from "next/cache";
 
 import { demoConfig } from "@/demo-config";
 import { mutateArticleLikes } from "@/queries/queries";
@@ -59,6 +60,11 @@ export async function saveLike(state: AddLikeState): Promise<AddLikeState> {
     // error
     return state;
   }
+
+  revalidatePath("/articles");
+  const path = `/articles/${articleId}`;
+  console.log("Revalidating path", path, "newLikes", newLikes);
+  revalidatePath(path);
 
   return {
     ...state,

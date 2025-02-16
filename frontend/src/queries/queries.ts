@@ -1,5 +1,3 @@
-import { revalidatePath } from "next/cache";
-
 import {
   AddLikeDocument,
   G_ArticleOrderBy,
@@ -68,8 +66,6 @@ export async function mutateArticleLikes(articleId: string) {
   });
 
   if (data && "likedArticle" in data.addLike) {
-    revalidatePath("/stories");
-    revalidatePath(`/stories/$articleId}`);
     return data.addLike.likedArticle.likes;
   }
 
