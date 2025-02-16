@@ -20,5 +20,5 @@ export const demoConfig: Record<string, number> = {
   GetRelatedArticles: 2400,
 
   // Delay the response in LikesWidget
-  AddLike: 2400,
+  AddLike: 500,
 };
