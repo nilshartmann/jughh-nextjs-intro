@@ -6,6 +6,7 @@
     "dev": "rm -rf .next && next dev --turbopack -p 20000",
     "start:clean": "rm -rf .next && next build && next start -p 3000",
     "build": "next build",
+    "build:clean": "rm -rf .next && next build",
     "start": "next start -p 3000",
     "lint": "next lint",
     "prettier:check": "prettier --check .",

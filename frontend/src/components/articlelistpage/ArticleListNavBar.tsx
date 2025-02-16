@@ -1,4 +1,4 @@
-import { OrderButton } from "@/components/articlelist/OrderButton";
+import { OrderButton } from "@/components/articlelistpage/OrderButton";
 import ButtonBar from "@/components/ButtonBar";
 import { NavButtonBar } from "@/NavButtonBar";
 

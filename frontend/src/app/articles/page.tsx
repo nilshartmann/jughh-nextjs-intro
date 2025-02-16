@@ -1,7 +1,7 @@
 import ArticleCard from "@/components/ArticleCard";
-import ArticleListGrid from "@/components/articlelist/ArticleListGrid";
-import ArticleListNavBar from "@/components/articlelist/ArticleListNavBar";
-import ArticleListPaginationBar from "@/components/articlelist/ArticleListPaginationBar";
+import ArticleListGrid from "@/components/articlelistpage/ArticleListGrid";
+import ArticleListNavBar from "@/components/articlelistpage/ArticleListNavBar";
+import ArticleListPaginationBar from "@/components/articlelistpage/ArticleListPaginationBar";
 import { fetchArticleList } from "@/queries/queries";
 
 type ArticleListPageProps = {
