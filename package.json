@@ -5,10 +5,10 @@
   "scripts": {
     "dev": "next dev --turbopack -p 20000",
     "dev:clean": "rm -rf .next && next dev --turbopack -p 20000",
-    "start:clean": "rm -rf .next && next build && next start -p 3000",
     "build": "next build",
     "build:clean": "rm -rf .next && next build",
-    "start": "next start -p 3000",
+    "start": "next start -p 20000",
+    "start:clean": "rm -rf .next && next build && next start -p 20000",
     "lint": "next lint",
     "prettier:check": "prettier --check .",
     "prettier:write": "prettier --write .",
