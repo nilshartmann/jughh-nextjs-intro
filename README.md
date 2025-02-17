@@ -5,7 +5,7 @@
 # IDE
 
 - Für den Workshop ist egal, welche IDE du verwendest, aber ich würde empfehlen, keine neue IDE auszuprobieren, sondern die IDE zu verwenden, die du ohnehin schon verwendest.
-- Wenn du noch keine IDE (für die JavaScript-Entwicklung) verwendest, würde ich Webstorm, IntelliJ oder PHPStorm empfehlen (je nachdem, welche Programmiersprache du sonst noch verwendest). Diese IDEs gibt es jeweils in einer Eveluationsversion, die du für den Workshop verwenden kannst. Sie bringen von Haus aus alles mit, was du für den Workshop benötigst. Du brauchst also keine Plug-ins etc. zu installieren.
+- Wenn du noch keine IDE (für die JavaScript-Entwicklung) verwendest, würde ich Webstorm, IntelliJ oder PHPStorm empfehlen (je nachdem, welche Programmiersprache du sonst noch verwendest). Diese IDEs gibt es jeweils in einer Testversion, die du für den Workshop verwenden kannst. Sie bringen von Haus aus alles mit, was du für den Workshop benötigst. Du brauchst also keine Plug-ins etc. zu installieren.
   - Du kannst das geklonte Repository-Verzeichnis (s.u.) einfach mit `File -> Open` öffnen.
 
 ## TypeScript in Webstorm / IntelliJ
@@ -30,7 +30,7 @@
 
 - Bitte klone das Repository von Github:
   - ```bash
-    git clone https://github.com/nextjsreactgraphql/react-intro.git
+    git clone https://github.com/nilshartmann/ecolify-frontend.git
     ```
 
 ## Installation der Packages
