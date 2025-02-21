@@ -57,15 +57,10 @@ export function ArticlePageBanner({ article }: ArticlePageBannerProps) {
                     A story by{" "}
                     <span className={"font-bold"}> {article.writer.name}</span>
                   </p>
-                  <LikesWidget article={article} style={"white"} />
-                  {/*<div*/}
-                  {/*  className={*/}
-                  {/*    "rounded border border-slate-900 bg-white px-2 py-1 tracking-wide text-teal-700"*/}
-                  {/*  }*/}
-                  {/*>*/}
-                  {/*  Reading time{" "}*/}
-                  {/*  {formatDuration((article.wordCount / 100) * 60)}*/}
-                  {/*</div>*/}
+                  <LikesWidget
+                    articleId={article.id}
+                    currentLikes={article.likes}
+                  />
                 </div>
               </div>
             </div>

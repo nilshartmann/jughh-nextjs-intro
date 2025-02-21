@@ -1,9 +1,7 @@
 "use server";
 import crypto from "crypto";
-import { revalidatePath } from "next/cache";
 
 import { delayConfig } from "@/demo-config";
-import { mutateArticleLikes } from "@/queries/queries";
 
 type NewsletterFormState = {
   email: string;
@@ -43,31 +41,5 @@ export async function subscribeToNewsletter(
     requestId: uniqueId(),
     email: "",
     status: "Subscribed!",
-  };
-}
-
-type AddLikeState = {
-  articleId: string;
-  likes: number;
-};
-
-export async function saveLike(state: AddLikeState): Promise<AddLikeState> {
-  const articleId = state.articleId;
-
-  console.log("SAVE LIKE", articleId);
-  const newLikes = await mutateArticleLikes(articleId);
-  if (newLikes === null) {
-    // error
-    return state;
-  }
-
-  revalidatePath("/articles");
-  const path = `/articles/${articleId}`;
-  console.log("Revalidating path", path, "newLikes", newLikes);
-  revalidatePath(path);
-
-  return {
-    ...state,
-    likes: newLikes,
   };
 }

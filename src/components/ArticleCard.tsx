@@ -62,7 +62,7 @@ export default function ArticleCard({ article }: ArticleCardProps) {
             >
               {formatDuration((article.wordCount / 100) * 60)}
             </div>
-            <LikesWidget article={article} />
+            <LikesWidget articleId={article.id} currentLikes={article.likes} />
           </div>
         </div>
       </div>
