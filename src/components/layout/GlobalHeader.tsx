@@ -1,8 +1,11 @@
 import Link from "next/link";
+import React, { ReactNode } from "react";
 
-import { NewsletterRegistration } from "@/components/NewsletterRegistration";
+type GlobalHeaderProps = {
+  children?: ReactNode;
+};
 
-export default function GlobalHeader() {
+export default function GlobalHeader({ children }: GlobalHeaderProps) {
   return (
     <div
       className={
@@ -18,7 +21,7 @@ export default function GlobalHeader() {
       >
         <i className="fa-solid fa-house"></i>
       </Link>
-      <NewsletterRegistration />
+      {children}
     </div>
   );
 }
