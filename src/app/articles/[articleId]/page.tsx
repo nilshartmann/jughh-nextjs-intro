@@ -3,7 +3,7 @@ import { Suspense } from "react";
 
 import ArticlePage from "@/components/articlepage/ArticlePage";
 import CommentList from "@/components/articlepage/CommentList";
-import RelatedArticles from "@/components/articlepage/RelatedArticles";
+import RelatedArticleSlider from "@/components/articlepage/RelatedArticleSlider";
 import LoadingIndicator from "@/components/LoadingIndicator";
 import { Sidebar } from "@/components/Sidebar";
 import { SidebarBox } from "@/components/SidebarBox";
@@ -49,7 +49,7 @@ export default async function ArticleRoutePage({ params }: ArticleRouteProps) {
       <Sidebar>
         <SidebarBox title={"Related Articles"}>
           <Suspense fallback={<LoadingIndicator />}>
-            <RelatedArticles articlesPromise={relatedArticles} />
+            <RelatedArticleSlider articlesPromise={relatedArticles} />
           </Suspense>
         </SidebarBox>
 

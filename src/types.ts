@@ -10,6 +10,12 @@ export type BaseArticle = {
   writer: { name: string };
 };
 
+export type RelatedArticle = {
+  title: string;
+  id: string;
+  image?: { uri: string; altText: string };
+};
+
 export type Article = BaseArticle & {
   body: string;
 };
