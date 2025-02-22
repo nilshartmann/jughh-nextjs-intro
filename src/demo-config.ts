@@ -27,7 +27,7 @@ export const delayConfig: Record<string, number> = {
 
 // Setting this to 'force-cache' will enable Next.js
 // DATA cache, so graphql requests are not run twice
-export const graphQlFetchCache: "force-cache" | null = "force-cache";
+export const graphQlFetchCache: "force-cache" | null = null;
 
 // used for excercies
 export const dummyRelatedArticles: RelatedArticle[] = [
