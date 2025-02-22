@@ -5,8 +5,8 @@ import React, { useActionState, useState } from "react";
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
 import LoadingIndicator from "@/components/LoadingIndicator";
+import { subscribeToNewsletter } from "@/components/newsletter-actions";
 
-import { subscribeToNewsletter } from "./ecolify-actions";
 // "progressive enhancement" form:
 //  - without enabled or loaded JS, this form is submitted as a "regular" form
 //    with full page refresh
