@@ -14,7 +14,7 @@
     "prettier:write": "prettier --write .",
     "graphql:codegen": "graphql-codegen",
     "graphql:codegen:watch": "graphql-codegen -w",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 20060",
     "build-storybook": "storybook build"
   },
   "dependencies": {
@@ -37,6 +37,7 @@
     "@parcel/watcher": "^2.5.1",
     "@storybook/addon-essentials": "^8.5.8",
     "@storybook/addon-interactions": "^8.5.8",
+    "@storybook/addon-links": "^8.5.8",
     "@storybook/addon-onboarding": "^8.5.8",
     "@storybook/blocks": "^8.5.8",
     "@storybook/nextjs": "^8.5.8",

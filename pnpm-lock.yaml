@@ -60,6 +60,9 @@ importers:
       '@storybook/addon-interactions':
         specifier: ^8.5.8
         version: 8.5.8(storybook@8.5.8(prettier@3.4.2))
+      '@storybook/addon-links':
+        specifier: ^8.5.8
+        version: 8.5.8(react@19.0.0)(storybook@8.5.8(prettier@3.4.2))
       '@storybook/addon-onboarding':
         specifier: ^8.5.8
         version: 8.5.8(storybook@8.5.8(prettier@3.4.2))
@@ -1777,6 +1780,15 @@ packages:
     resolution: {integrity: sha512-SDyIV3M+c41QemXgg1OchsFBO6YGZkZcmVeUF8C7aWm5SnzLh6B2OiggiKvRk0v3Eh3rDLXdkx3XdR2F/rG+0Q==}
     peerDependencies:
       storybook: ^8.5.8
+
+  '@storybook/addon-links@8.5.8':
+    resolution: {integrity: sha512-nLfcWhqDCTaEB/zPjzdN+FtsJ3WnvrRE7Uq+UZHF/HDqt7EXicUYCnbzHIF6ReyNBFklr48O/RhotDu9cyUDlw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
+      storybook: ^8.5.8
+    peerDependenciesMeta:
+      react:
+        optional: true
 
   '@storybook/addon-measure@8.5.8':
     resolution: {integrity: sha512-xf84ByTRkFPoNSck6Z5OJ0kXTYAYgmg/0Ke0eCY/CNgwh7lfjYQBrcjuKiYZ6jyRUMLdysXzIfF9/2MeFqLfIg==}
@@ -7594,6 +7606,15 @@ snapshots:
       polished: 4.3.1
       storybook: 8.5.8(prettier@3.4.2)
       ts-dedent: 2.2.0
+
+  '@storybook/addon-links@8.5.8(react@19.0.0)(storybook@8.5.8(prettier@3.4.2))':
+    dependencies:
+      '@storybook/csf': 0.1.12
+      '@storybook/global': 5.0.0
+      storybook: 8.5.8(prettier@3.4.2)
+      ts-dedent: 2.2.0
+    optionalDependencies:
+      react: 19.0.0
 
   '@storybook/addon-measure@8.5.8(storybook@8.5.8(prettier@3.4.2))':
     dependencies:

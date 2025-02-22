@@ -1,10 +1,10 @@
-import "./ArticlesHeader.css";
+import "./ArticlesRouteHeader.css";
 
 import Link from "next/link";
 
 import Breaking from "@/components/Breaking";
 
-export default function ArticlesHeader() {
+export default function ArticlesRouteHeader() {
   return (
     <header className={"global-header flex h-36 items-center"}>
       <div className={"mx-auto w-full max-w-screen-lg"}>

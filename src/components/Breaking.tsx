@@ -7,10 +7,9 @@ import { Marquee } from "@/components/Marquee";
 
 interface BreakingProps {
   children: ReactNode;
-  speed?: number;
 }
 
-const Breaking: React.FC<BreakingProps> = ({ children, speed = 25 }) => {
+const Breaking: React.FC<BreakingProps> = ({ children }) => {
   const [visible, setVisible] = useState(false);
 
   const buttonClassName = twMerge("cursor", visible ? "ms-4" : "rounded-lg");

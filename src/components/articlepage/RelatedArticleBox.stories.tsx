@@ -4,6 +4,7 @@ import RelatedArticleBox from "@/components/articlepage/RelatedArticleBox";
 
 const meta: Meta<typeof RelatedArticleBox> = {
   component: RelatedArticleBox,
+  title: "Article Page Components / RelatedArticleBox",
   args: {
     onNextClick() {},
     onPrevClick() {},

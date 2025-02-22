@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
+import { ArticleBanner } from "@/components/articlepage/ArticleBanner";
 import ArticleBody from "@/components/articlepage/ArticleBody";
-import { ArticlePageBanner } from "@/components/articlepage/ArticlePageBanner";
 import TwoColumnLayout from "@/components/layout/TwoColumnLayout";
 import { Article } from "@/types";
 
@@ -14,7 +14,7 @@ type ArticlePageProps = {
 export default function ArticlePage({ article, children }: ArticlePageProps) {
   return (
     <>
-      <ArticlePageBanner article={article} />
+      <ArticleBanner article={article} />
       <TwoColumnLayout sidebar={children}>
         <ArticleBody body={article.body} />
       </TwoColumnLayout>

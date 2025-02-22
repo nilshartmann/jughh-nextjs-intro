@@ -4,6 +4,7 @@ import GlobalHeader from "@/components/layout/GlobalHeader";
 
 const meta: Meta<typeof GlobalHeader> = {
   component: GlobalHeader,
+  title: "Common Layout / GlobalHeader",
 };
 
 export default meta;
