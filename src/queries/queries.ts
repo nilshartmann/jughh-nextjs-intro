@@ -26,7 +26,7 @@ export async function fetchArticleList({
     },
   });
 
-  return data;
+  return data.articleList;
 }
 
 export async function fetchArticle(

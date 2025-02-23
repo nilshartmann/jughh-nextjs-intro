@@ -14,22 +14,19 @@ export default async function ArticleListPage({
 
   console.log("Rendering ArticleListPage with searchParams", orderBy, page);
 
-  const data = await fetchArticleList({ orderBy, page });
+  const articleList = await fetchArticleList({ orderBy, page });
 
   return (
     <div className={"container mx-auto space-y-4"}>
       <ArticleListNavBar />
 
       <ArticleListGrid>
-        {data.articles.results.map((a) => {
+        {articleList.articles.map((a) => {
           return <ArticleCard key={a.id} article={a} />;
         })}
       </ArticleListGrid>
 
-      <ArticleListPaginationBar
-        pageable={data.articles}
-        params={searchParams}
-      />
+      <ArticleListPaginationBar pageable={articleList} params={searchParams} />
     </div>
   );
 }

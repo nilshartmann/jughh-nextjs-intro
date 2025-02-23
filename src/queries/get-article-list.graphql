@@ -1,7 +1,7 @@
 query GetArticleList($orderBy: ArticleOrderBy = DATE, $page: Int! = 1) {
-  articles(page: $page, orderBy: $orderBy, pageSize: 6) {
+  articleList: articles(page: $page, orderBy: $orderBy, pageSize: 6) {
     totalPages
-    results {
+    articles: results {
       ...BaseArticleFragment
     }
   }
