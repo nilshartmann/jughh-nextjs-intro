@@ -1,10 +1,10 @@
 mutation AddLike($articleId: ID!) {
-    addLike(input: { articleId: $articleId}) {
-        ...on AddLikeSuccess {
-            likedArticle: article {
-                id
-                likes
-            }
-        }
+  addLike(input: { articleId: $articleId }) {
+    ... on AddLikeSuccess {
+      likedArticle: article {
+        id
+        likes
+      }
     }
+  }
 }

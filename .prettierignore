@@ -1,2 +1,3 @@
 pnpm-lock.yaml
 _generated*
+public/**/*.css
