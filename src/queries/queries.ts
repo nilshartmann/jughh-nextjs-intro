@@ -7,7 +7,7 @@ import {
   GetRelatedArticlesDocument,
 } from "@/_generated-graphql-types";
 import { getClient, query } from "@/graphql-client";
-import { Article } from "@/types";
+import { Article, Comment, RelatedArticle } from "@/types";
 
 export async function fetchArticleList(
   page: string | number | undefined | null = 1,
@@ -37,7 +37,7 @@ export async function fetchArticle(
   return data.article;
 }
 
-export async function fetchComments(articleId: string) {
+export async function fetchComments(articleId: string): Promise<Comment[]> {
   const { data } = await query({
     query: GetCommentListDocument,
     variables: {
@@ -48,7 +48,9 @@ export async function fetchComments(articleId: string) {
   return data.article?.comments || [];
 }
 
-export async function fetchRelatedArticles(articleId: string) {
+export async function fetchRelatedArticles(
+  articleId: string,
+): Promise<RelatedArticle[]> {
   const { data } = await query({
     query: GetRelatedArticlesDocument,
     variables: {
@@ -59,7 +61,9 @@ export async function fetchRelatedArticles(articleId: string) {
   return data.article?.relatedArticles || [];
 }
 
-export async function mutateArticleLikes(articleId: string) {
+export async function mutateArticleLikes(
+  articleId: string,
+): Promise<number | null> {
   const apolloClient = getClient();
   const { data } = await apolloClient.mutate({
     mutation: AddLikeDocument,
