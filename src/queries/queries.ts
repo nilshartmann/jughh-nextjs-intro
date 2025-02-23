@@ -9,10 +9,15 @@ import {
 import { getClient, query } from "@/graphql-client";
 import { Article, Comment, RelatedArticle } from "@/types";
 
-export async function fetchArticleList(
-  page: string | number | undefined | null = 1,
-  orderBy: string | undefined | null = "DATE",
-) {
+type FetchArticleListParams = {
+  page?: string | number | undefined | null;
+  orderBy?: string | undefined | null;
+};
+
+export async function fetchArticleList({
+  page = 1,
+  orderBy = "DATE",
+}: FetchArticleListParams = {}) {
   const { data } = await query({
     query: GetArticleListDocument,
     variables: {

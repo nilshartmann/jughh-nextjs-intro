@@ -14,7 +14,7 @@ export default async function ArticleListPage({
 
   console.log("Rendering ArticleListPage with searchParams", orderBy, page);
 
-  const data = await fetchArticleList(page, orderBy);
+  const data = await fetchArticleList({ orderBy, page });
 
   return (
     <div className={"container mx-auto space-y-4"}>
