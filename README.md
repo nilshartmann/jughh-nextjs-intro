@@ -1,8 +1,10 @@
 # Next.js Workshop
 
-> Um sicherzustellen, dass während des Workshops alles funktioniert, möchte ich dich bitten, die Packages zu installieren und das (noch leere) Frontend einmal zu starten.
->
-> Das ist insbesondere wichtig, da wir Probleme mit fehlenden Zugriffsrechten, VPN-Einstellungen, Proxies, Firewalls, etc. während des Workshops nicht lösen können.
+Dieses Repository enthält den Code für meine Next.js Workshop-Anwendung. Unten findest du die technischen Voraussetzungen sowie eine Installationsanleitung zum Einrichten des Workshops.
+
+Wenn du Interesse an React- oder Next.js-Workshops hast, melde dich gerne bei mir. Weitere Informationen: https://react.schule.
+
+![Screenshot](./screenshot.png)
 
 # Benötigte Tools
 
