@@ -14,11 +14,15 @@ export default function ArticleCard({ article }: ArticleCardProps) {
   return (
     <div
       className={
-        "flex h-full flex-col space-y-4 rounded-lg border border-slate-200 bg-white drop-shadow-sm"
+        "group flex h-full flex-col space-y-4 rounded-lg border border-slate-200 bg-white drop-shadow-sm"
       }
     >
       {article.image && (
-        <div className={"border-b-4 border-b-rose-700 hover:border-b-teal-800"}>
+        <div
+          className={
+            "border-b-4 border-b-teal-800 group-hover:border-b-rose-700"
+          }
+        >
           <Link prefetch={false} href={`/articles/${article.id}`}>
             <div className={"overflow-hidden"}>
               <img
