@@ -22,7 +22,7 @@ export default function PaginationBar({
 }: PaginationBarProps) {
   let disabled: boolean = false;
   const currentPageNumber = currentPage;
-  const maxButtons = 6;
+  const maxButtons = 3;
   let startPage: number;
   let endPage: number;
   const buttons: ReactNode[] = [];
@@ -38,16 +38,16 @@ export default function PaginationBar({
     endPage = startPage + maxButtons - 1;
   }
 
-  buttons.push(
-    <Fragment key={"first_page"}>
-      {children({
-        label: "<<",
-        state: disabled || currentPageNumber <= 1 ? "disabled" : "selectable",
-        page: 1,
-        disabled: disabled || currentPageNumber <= 1,
-      })}
-    </Fragment>,
-  );
+  // buttons.push(
+  //   <Fragment key={"first_page"}>
+  //     {children({
+  //       label: "<<",
+  //       state: disabled || currentPageNumber <= 1 ? "disabled" : "selectable",
+  //       page: 1,
+  //       disabled: disabled || currentPageNumber <= 1,
+  //     })}
+  //   </Fragment>,
+  // );
   buttons.push(
     <Fragment key={"prev_page"}>
       {children({
@@ -87,19 +87,19 @@ export default function PaginationBar({
       })}
     </Fragment>,
   );
-  buttons.push(
-    <Fragment key={"last_page"}>
-      {children({
-        label: ">>",
-        state:
-          disabled || currentPageNumber >= totalPages
-            ? "disabled"
-            : "selectable",
-        page: totalPages,
-        disabled: disabled || currentPageNumber >= totalPages,
-      })}
-    </Fragment>,
-  );
+  // buttons.push(
+  //   <Fragment key={"last_page"}>
+  //     {children({
+  //       label: ">>",
+  //       state:
+  //         disabled || currentPageNumber >= totalPages
+  //           ? "disabled"
+  //           : "selectable",
+  //       page: totalPages,
+  //       disabled: disabled || currentPageNumber >= totalPages,
+  //     })}
+  //   </Fragment>,
+  // );
 
   return <ButtonBar>{buttons}</ButtonBar>;
 }
