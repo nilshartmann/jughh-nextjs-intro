@@ -7,40 +7,21 @@ import { Input } from "@/components/Input";
 import LoadingIndicator from "@/components/LoadingIndicator";
 import { subscribeToNewsletter } from "@/components/newsletter-actions";
 
-// "progressive enhancement" form:
-//  - without enabled or loaded JS, this form is submitted as a "regular" form
-//    with full page refresh
-//  - with javascript only the data is submitted and the form is updated, but
-//    not the whole ui
-//    also with js there the user message is removed after user changes the
-//    email address
+// 🕵️‍♂️ "progressive enhancement" form:
+//    - WITHOUT enabled or loaded JS, this form is submitted as a "regular" form
+//      with full page refresh
+//    - WITH javascript only the data is submitted and the form is updated, but
+//      not the whole ui
+//    - with javascript we have a loading indicator
+//    - also with js there the message is removed after user changes the
+//      email address
 export function NewsletterRegistration() {
   const [formState, action, isPending] = useActionState(subscribeToNewsletter, {
-    requestId: "initial",
     email: "",
-    status: null,
   });
 
-  const [changedRequestId, setChangedRequestId] = useState<
-    string | undefined
-  >();
+  const [changedRequestId, setChangedRequestId] = useState("");
 
-  const handleEmailChange = () => {
-    setChangedRequestId(formState.requestId);
-  };
-
-  // when undefined is very first rendering OR on server
-  // if NO js is in the browser, changed will never be set to
-  // anything else than 'undefined'.
-  // in this case we have to show the message (if there is any)
-  //  and can never remove it
-  // but if THERE IS js in the browser on first keystroke
-  //  changed will be set to the current request Id
-  //  - when the server then sends a new form (after submitting)
-  //    with a new request id, requestId in local state and in form/action state
-  //    differ and the message will be displayed, until
-  //    there is the next keystroke, that again "aligns" form/action state
-  //    and local state
   const shouldShowMessage =
     changedRequestId === undefined
       ? true
@@ -57,7 +38,7 @@ export function NewsletterRegistration() {
         <Input
           name={"email"}
           defaultValue={formState.email}
-          onChange={handleEmailChange}
+          onChange={() => setChangedRequestId(formState.requestId || "")}
           disabled={isPending}
           placeholder={"E-Mail"}
         />
@@ -69,7 +50,7 @@ export function NewsletterRegistration() {
           ) : (
             <button
               type={"submit"}
-              onClick={() => setChangedRequestId(formState.requestId)}
+              onClick={() => setChangedRequestId(formState.requestId || "")}
             >
               Subscribe
             </button>
@@ -77,12 +58,7 @@ export function NewsletterRegistration() {
         </Button>
       </div>
 
-      <div>
-        {formState.status === "Subscribed!" &&
-          shouldShowMessage &&
-          "Subscribed!"}
-        {formState.status === "Error" && shouldShowMessage && "Error!"}
-      </div>
+      <div>{shouldShowMessage && formState.status}</div>
     </form>
   );
 }

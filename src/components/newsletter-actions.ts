@@ -4,9 +4,9 @@ import crypto from "crypto";
 import { delayConfig } from "@/demo-config";
 
 type NewsletterFormState = {
-  email: string;
-  requestId: string;
-  status: "Subscribed!" | "Error" | null;
+  email?: string;
+  requestId?: string;
+  status?: "Subscribed!" | "Error" | null;
 };
 
 function uniqueId() {
