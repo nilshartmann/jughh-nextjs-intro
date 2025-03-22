@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
 
-import Breaking from "@/components/Breaking";
+import BreakingNews from "@/components/BreakingNews";
 
-const breakingMeta: Meta<typeof Breaking> = {
-  component: Breaking,
+const breakingNewsMeta: Meta<typeof BreakingNews> = {
+  component: BreakingNews,
   tags: ["autodocs", "!dev"],
 
   parameters: {
@@ -24,7 +24,7 @@ const breakingMeta: Meta<typeof Breaking> = {
   },
 };
 
-export default breakingMeta;
+export default breakingNewsMeta;
 
 //
 //
@@ -40,9 +40,9 @@ export default breakingMeta;
 //
 //
 // --------------
-type BreakingStory = StoryObj<typeof Breaking>;
+type BreakingNewsStory = StoryObj<typeof BreakingNews>;
 
-export const Primary: BreakingStory = {
+export const Primary: BreakingNewsStory = {
   args: {
     children: "+++ Eil +++ News +++ Sofort lesen! +++",
   },

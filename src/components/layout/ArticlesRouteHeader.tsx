@@ -2,7 +2,7 @@ import "./ArticlesRouteHeader.css";
 
 import Link from "next/link";
 
-import Breaking from "@/components/Breaking";
+import BreakingNews from "@/components/BreakingNews";
 
 export default function ArticlesRouteHeader() {
   return (
@@ -47,11 +47,11 @@ export default function ArticlesRouteHeader() {
               "max-w-80 rounded-lg bg-teal-100/30 p-4 hover:bg-teal-600/40"
             }
           >
-            <Breaking>
+            <BreakingNews>
               A Race Against Time +++ New Discoveries in Marine Biology +++ The
               Next Digital Revolution +++ Next Stop Europa +++ Biodiversity
               Conservation Efforts Gain Momentum
-            </Breaking>
+            </BreakingNews>
           </div>
         </div>
       </div>

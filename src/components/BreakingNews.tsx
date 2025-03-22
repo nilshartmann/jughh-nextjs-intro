@@ -5,14 +5,14 @@ import { twMerge } from "tailwind-merge";
 
 import { Marquee } from "@/components/Marquee";
 
-interface BreakingProps {
+interface BreakingNewsProps {
   children: ReactNode;
 }
 
-const Breaking: React.FC<BreakingProps> = ({ children }) => {
+export default function BreakingNews({ children }: BreakingNewsProps) {
   const [visible, setVisible] = useState(false);
 
-  const buttonClassName = twMerge("cursor", visible ? "ms-4" : "rounded-lg");
+  const toggleVisibility = () => setVisible(!visible);
 
   return (
     <div className={"flex"}>
@@ -25,7 +25,10 @@ const Breaking: React.FC<BreakingProps> = ({ children }) => {
           {children}
         </Marquee>
       )}
-      <button className={buttonClassName} onClick={() => setVisible(!visible)}>
+      <button
+        className={twMerge("cursor", visible ? "ms-4" : "rounded-lg")}
+        onClick={toggleVisibility}
+      >
         {visible ? (
           <i className="fa-regular fa-circle-xmark" />
         ) : (
@@ -34,6 +37,4 @@ const Breaking: React.FC<BreakingProps> = ({ children }) => {
       </button>
     </div>
   );
-};
-
-export default Breaking;
+}
