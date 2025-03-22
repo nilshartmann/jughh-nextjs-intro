@@ -85,7 +85,7 @@ type PageButtonProps = {
 };
 export function PageButton({ state: { state, label } }: PageButtonProps) {
   const buttonClassName = twMerge(
-    "inline-flex h-9 w-9 items-center justify-center rounded px-4 py-2 font-barlow text-white underline-offset-2 transition-all duration-500 ease-in-out",
+    "inline-flex h-12 w-12 items-center justify-center rounded px-4 py-2 font-barlow text-white underline-offset-4 transition-all duration-500 ease-in-out",
     state === "selectable" &&
       "cursor-pointer bg-teal-600 hover:bg-teal-700 hover:underline",
     state === "active" && "bg-teal-900 underline hover:bg-teal-900",

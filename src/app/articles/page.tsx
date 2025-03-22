@@ -18,19 +18,15 @@ export default async function ArticleListPage({
 
   return (
     <div className={"container mx-auto space-y-4"}>
-      <div className={"flex items-center justify-between"}>
-        <ArticleListPaginationBar
-          pageable={articleList}
-          params={searchParams}
-        />
-        <ArticleListNavBar />
-      </div>
+      <ArticleListNavBar />
 
       <ArticleListGrid>
         {articleList.articles.map((a) => {
           return <ArticleCard key={a.id} article={a} />;
         })}
       </ArticleListGrid>
+
+      <ArticleListPaginationBar pageable={articleList} params={searchParams} />
     </div>
   );
 }

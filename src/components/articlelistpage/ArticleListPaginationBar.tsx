@@ -20,7 +20,7 @@ export default async function ArticleListPaginationBar({
   const currentPage = parseInt(searchParams.page || "1");
 
   return (
-    <div className={"flex"}>
+    <div className={"flex justify-center pt-4"}>
       <PaginationBar totalPages={totalPages} currentPage={currentPage}>
         {(btn) =>
           btn.disabled ? (
