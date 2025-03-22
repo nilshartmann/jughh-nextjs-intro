@@ -1,9 +1,10 @@
 import Link from "next/link";
+import React from "react";
 
 import { formatDate } from "@/components/format-date";
-import { formatDuration } from "@/components/format-duration";
 import { H1 } from "@/components/Heading";
 import { LikesWidget } from "@/components/LikesWidget";
+import ReadingTimeWidget from "@/components/ReadingTimeWidget";
 import { BaseArticle } from "@/types";
 
 type ArticleCardProps = {
@@ -55,13 +56,7 @@ export default function ArticleCard({ article }: ArticleCardProps) {
         </div>
         <div className={"flex flex-col"}>
           <div className={"flex items-center justify-between"}>
-            <div
-              className={
-                "rounded border border-slate-200 bg-slate-50 px-2 py-1 tracking-wide text-teal-700"
-              }
-            >
-              {formatDuration((article.wordCount / 100) * 60)}
-            </div>
+            <ReadingTimeWidget wordCount={article.wordCount} />
             <LikesWidget articleId={article.id} currentLikes={article.likes} />
           </div>
         </div>

@@ -1,6 +1,7 @@
 import ArticleBannerWrapper from "@/components/articlepage/ArticleBannerWrapper";
 import { formatDate } from "@/components/format-date";
 import { LikesWidget } from "@/components/LikesWidget";
+import ReadingTimeWidget from "@/components/ReadingTimeWidget";
 import { Article } from "@/types";
 
 type ArticleBannerProps = {
@@ -51,10 +52,13 @@ export function ArticleBanner({ article }: ArticleBannerProps) {
                   A story by{" "}
                   <span className={"font-bold"}> {article.writer.name}</span>
                 </p>
-                <LikesWidget
-                  articleId={article.id}
-                  currentLikes={article.likes}
-                />
+                <div className={"flex gap-x-2"}>
+                  <ReadingTimeWidget wordCount={article.wordCount} />
+                  <LikesWidget
+                    articleId={article.id}
+                    currentLikes={article.likes}
+                  />
+                </div>
               </div>
             </div>
           </div>

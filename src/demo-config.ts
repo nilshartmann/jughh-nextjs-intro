@@ -25,6 +25,10 @@ export const delayConfig: Record<string, number> = {
   AddLike: 500,
 };
 
+// when set to true, also add
+// <ReadingSpeedProvider> to /app/layout.tsx
+export const showReadingSpeedChooser = false;
+
 // Setting this to 'force-cache' will enable Next.js
 // DATA cache, so graphql requests are not run twice
 export const graphQlFetchCache: "force-cache" | null = null;
