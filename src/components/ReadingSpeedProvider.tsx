@@ -21,7 +21,7 @@ export default function ReadingSpeedProvider({
 }: ReadingSpeedProviderProps) {
   const [readingSpeed, setReadingSpeed] = useState(100);
 
-  const update = (amount: number) => setReadingSpeed((a) => a + amount);
+  const update = (amount: number) => setReadingSpeed(readingSpeed + amount);
 
   return (
     <ReadingSpeedContext value={{ readingSpeed, update }}>

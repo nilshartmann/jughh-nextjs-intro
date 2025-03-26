@@ -2,7 +2,7 @@ import { twMerge } from "tailwind-merge";
 
 type PlusButtonProps = {
   disabled?: boolean;
-  onClick(): void;
+  onClick?(): void;
 };
 export default function PlusButton({ disabled, onClick }: PlusButtonProps) {
   return (

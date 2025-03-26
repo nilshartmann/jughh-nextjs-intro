@@ -38,6 +38,7 @@ const eslintConfig = [
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/ban-types": "off",
       "prefer-const": "off",
+      "@typescript-eslint/no-empty-object-type": "off",
       ...importRules,
     },
   }),

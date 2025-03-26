@@ -3,15 +3,15 @@ import crypto from "crypto";
 
 import { delayConfig } from "@/demo-config";
 
+function uniqueId() {
+  return crypto.randomUUID();
+}
+
 type NewsletterFormState = {
   email?: string;
   requestId?: string;
   status?: "Subscribed!" | "Error" | null;
 };
-
-function uniqueId() {
-  return crypto.randomUUID();
-}
 
 export async function subscribeToNewsletter(
   _prevState: NewsletterFormState,
@@ -26,8 +26,6 @@ export async function subscribeToNewsletter(
   );
 
   const email = formData.get("email") as string;
-
-  console.log("SUBSCRIBED E-MAIL", email);
 
   if (email.length < 4) {
     return {

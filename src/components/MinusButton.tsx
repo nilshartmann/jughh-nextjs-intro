@@ -2,7 +2,7 @@ import { twMerge } from "tailwind-merge";
 
 type MinusButtonProps = {
   disabled?: boolean;
-  onClick(): void;
+  onClick?(): void;
 };
 export default function MinusButton({ disabled, onClick }: MinusButtonProps) {
   return (

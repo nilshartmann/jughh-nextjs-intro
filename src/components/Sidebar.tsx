@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 type SidebarProps = {
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 export function Sidebar({ children }: SidebarProps) {

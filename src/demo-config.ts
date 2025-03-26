@@ -1,8 +1,8 @@
 import { RelatedArticle } from "@/types";
 
-export const enableSuspense = false;
+export const enableSuspense = true;
 
-export const enableRelatedArticlesButton = false;
+export const enableRelatedArticlesButton = true;
 
 // when set to true, also add
 // <ReadingSpeedProvider> to /app/layout.tsx

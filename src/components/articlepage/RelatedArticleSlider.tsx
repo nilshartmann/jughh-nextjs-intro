@@ -1,26 +1,14 @@
 "use client";
 
-import { use, useState } from "react";
+import { useState } from "react";
 
 import RelatedArticleBox from "@/components/articlepage/RelatedArticleBox";
-import { RelatedArticle } from "@/types";
+import { dummyRelatedArticles } from "@/demo-config";
 
-type RelatedArticlesProps = {
-  articlesPromise: Promise<RelatedArticle[]>;
-};
+type RelatedArticlesProps = {};
 
-export default function RelatedArticleSlider({
-  articlesPromise,
-}: RelatedArticlesProps) {
-  // Note:
-  //  Next.js starts loading the articles imediately when
-  //  rendering the /articles/articleId route _on the server_
-  //  but does NOT wait for the promise to be fullfilled.
-  //  instead it sends the _pending_ promise to the client
-  //  and here in the browser we're now awaiting the promise
-
-  const articles = use(articlesPromise);
-
+export default function RelatedArticleSlider({}: RelatedArticlesProps) {
+  const articles = dummyRelatedArticles;
   const [selected, setSelected] = useState(0);
 
   const article = articles[selected];

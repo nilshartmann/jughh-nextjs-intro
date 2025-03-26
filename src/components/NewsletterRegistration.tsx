@@ -22,11 +22,6 @@ export function NewsletterRegistration() {
 
   const [changedRequestId, setChangedRequestId] = useState("");
 
-  const shouldShowMessage =
-    changedRequestId === undefined
-      ? true
-      : formState.requestId !== changedRequestId;
-
   return (
     <form
       action={action}
@@ -58,7 +53,11 @@ export function NewsletterRegistration() {
         </Button>
       </div>
 
-      <div>{shouldShowMessage && formState.status}</div>
+      <div>
+        {changedRequestId === undefined
+          ? true
+          : formState.requestId !== changedRequestId && formState.status}
+      </div>
     </form>
   );
 }
