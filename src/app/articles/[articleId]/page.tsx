@@ -7,6 +7,7 @@ import RelatedArticleSlider from "@/components/articlepage/RelatedArticleSlider"
 import LoadingIndicator from "@/components/LoadingIndicator";
 import { Sidebar } from "@/components/Sidebar";
 import { SidebarBox } from "@/components/SidebarBox";
+import { enableSuspense } from "@/demo-config";
 import { fetchArticle, fetchRelatedArticles } from "@/queries/queries";
 
 type ArticleRouteProps = {
@@ -48,17 +49,27 @@ export default async function ArticleRoutePage({ params }: ArticleRouteProps) {
     <ArticlePage article={article}>
       <Sidebar>
         <SidebarBox title={"Related Articles"}>
-          <Suspense fallback={<LoadingIndicator />}>
+          {enableSuspense ? (
+            <Suspense fallback={<LoadingIndicator />}>
+              <RelatedArticleSlider articlesPromise={relatedArticles} />
+            </Suspense>
+          ) : (
             <RelatedArticleSlider articlesPromise={relatedArticles} />
-          </Suspense>
+          )}
         </SidebarBox>
 
         <SidebarBox title={"What others think"}>
-          <Suspense
-            fallback={<LoadingIndicator>Loading comments...</LoadingIndicator>}
-          >
+          {enableSuspense ? (
+            <Suspense
+              fallback={
+                <LoadingIndicator>Loading comments...</LoadingIndicator>
+              }
+            >
+              <CommentList articleId={article.id} />
+            </Suspense>
+          ) : (
             <CommentList articleId={article.id} />
-          </Suspense>
+          )}
         </SidebarBox>
       </Sidebar>
     </ArticlePage>
