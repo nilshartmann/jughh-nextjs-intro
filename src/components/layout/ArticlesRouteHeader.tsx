@@ -4,7 +4,6 @@ import Link from "next/link";
 
 import BreakingNews from "@/components/BreakingNews";
 import ReadingSpeedChooser from "@/components/ReadingSpeedChooser";
-import { showReadingSpeedChooser } from "@/demo-config";
 
 export default function ArticlesRouteHeader() {
   return (
@@ -44,11 +43,9 @@ export default function ArticlesRouteHeader() {
             </div>
           </Link>
 
-          {showReadingSpeedChooser && (
-            <div className={"rounded-lg bg-teal-100/30 p-2"}>
-              <ReadingSpeedChooser />
-            </div>
-          )}
+          <div className={"rounded-lg bg-teal-100/30 p-2"}>
+            <ReadingSpeedChooser />
+          </div>
 
           <div
             className={
