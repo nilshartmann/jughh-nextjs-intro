@@ -1,5 +1,13 @@
 import { RelatedArticle } from "@/types";
 
+export const enableSuspense = false;
+
+export const enableRelatedArticlesButton = false;
+
+// when set to true, also add
+// <ReadingSpeedProvider> to /app/layout.tsx
+export const showReadingSpeedChooser = false;
+
 /**
  * Can be used to artifically delay single GraphQL requests
  * to simulate slow response times from the backend
@@ -19,15 +27,11 @@ export const delayConfig: Record<string, number> = {
   GetCommentList: 0,
 
   // Reading related articles on `/articles/[articleId]`,
-  GetRelatedArticles: 2400,
+  GetRelatedArticles: 0,
 
   // Delay the response in LikesWidget
-  AddLike: 500,
+  AddLike: 250,
 };
-
-// when set to true, also add
-// <ReadingSpeedProvider> to /app/layout.tsx
-export const showReadingSpeedChooser = false;
 
 // Setting this to 'force-cache' will enable Next.js
 // DATA cache, so graphql requests are not run twice

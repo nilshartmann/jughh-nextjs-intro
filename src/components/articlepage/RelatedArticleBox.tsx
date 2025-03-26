@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { ArrowButton } from "@/components/Button";
 import { H3 } from "@/components/Heading";
+import { enableRelatedArticlesButton } from "@/demo-config";
 import { RelatedArticle } from "@/types";
 
 type RelatedArticleBoxProps = {
@@ -34,12 +35,14 @@ export default function RelatedArticleBox({
             alt={article.image?.altText}
           />
 
-          <button
-            className={"absolute left-2 top-2"}
-            onClick={() => onPrevClick()}
-          >
-            <ArrowButton direction={"left"} />
-          </button>
+          {enableRelatedArticlesButton && (
+            <button
+              className={"absolute left-2 top-2"}
+              onClick={() => onPrevClick()}
+            >
+              <ArrowButton direction={"left"} />
+            </button>
+          )}
           <div className={"absolute bottom-2 w-full"}>
             <div
               className={
@@ -55,12 +58,14 @@ export default function RelatedArticleBox({
               </Link>
             </div>
           </div>
-          <button
-            onClick={() => onNextClick()}
-            className={"absolute right-2 top-2"}
-          >
-            <ArrowButton direction={"right"} />
-          </button>
+          {enableRelatedArticlesButton && (
+            <button
+              onClick={() => onNextClick()}
+              className={"absolute right-2 top-2"}
+            >
+              <ArrowButton direction={"right"} />
+            </button>
+          )}
         </div>
       </div>
     </div>

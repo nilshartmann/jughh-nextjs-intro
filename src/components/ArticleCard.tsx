@@ -14,7 +14,7 @@ export default function ArticleCard({ article }: ArticleCardProps) {
   return (
     <div
       className={
-        "group flex h-full flex-col space-y-4 rounded-lg border border-slate-200 bg-white drop-shadow-sm"
+        "group flex h-[31rem] flex-col space-y-4 rounded-lg border border-slate-200 bg-white drop-shadow-sm"
       }
     >
       {article.image && (
