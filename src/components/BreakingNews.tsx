@@ -1,4 +1,6 @@
-import { ReactNode } from "react";
+"use client";
+
+import { ReactNode, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { Marquee } from "@/components/Marquee";
@@ -8,7 +10,7 @@ interface BreakingNewsProps {
 }
 
 export default function BreakingNews({ children }: BreakingNewsProps) {
-  const visible = true;
+  const [visible, setVisible] = useState(true);
 
   return (
     <div className={"flex"}>
@@ -21,7 +23,10 @@ export default function BreakingNews({ children }: BreakingNewsProps) {
           {children}
         </Marquee>
       )}
-      <button className={twMerge("cursor", visible ? "ms-4" : "rounded-lg")}>
+      <button
+        onClick={() => setVisible(!visible)}
+        className={twMerge("cursor", visible ? "ms-4" : "rounded-lg")}
+      >
         {visible ? (
           <i className="fa-regular fa-circle-xmark" />
         ) : (

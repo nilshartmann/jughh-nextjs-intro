@@ -49,7 +49,11 @@ export default function Home() {
             </p>
           </div>
           <div className="flex justify-center">
-            <Button size={"lg"}>Let me in - I want to read more! 😻</Button>
+            <Button size={"lg"}>
+              <Link href={"/articles"}>
+                Let me in - I want to read more! 😻
+              </Link>
+            </Button>
           </div>
         </div>
         <Footer variant={"light"} />
